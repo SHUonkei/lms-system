@@ -1,0 +1,30 @@
+services:
+  spring-boot:
+    build:
+      context: ./SpringBootTodo
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_started
+    entrypoint: "java -jar /app/app.jar"
+    networks:
+      - app-net
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/settings:/etc/mysql/conf.d/
+      - ./mysql/data/:/var/lib/mysql/
+    environment:
+      MYSQL_DATABASE: spring_boot_todo
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - app-net
+networks:
+  app-net:
+    driver: bridge
