@@ -20,16 +20,13 @@ Track student progress and grades
 Add, delete, modify, and view instructor information
 Assign instructors to lectures
 Manage instructor workload and availability
-## Benefits:
 
-Improved organization and efficiency: Streamline lecture management and student enrollment processes
-Enhanced communication and collaboration: Facilitate communication between instructors, students, and staff
-Accurate and up-to-date information: Maintain a centralized repository of lecture, student, and instructor data
-Data-driven decision-making: Analyze enrollment trends and instructor workload to make informed decisions
 ## Target Users:
 
-Lecture instructors: Manage their lectures, students, and assignments
-Academic advisors: Assist students with course selection and registration
-Administrative staff: Maintain student records and manage enrollment data
+- Lecture instructors: Manage their lectures, students, and assignments
+- Academic advisors: Assist students with course selection and registration
+- Administrative staff: Maintain student records and manage enrollment data
+
+
 Overall, a lecture management system is an essential tool for educational institutions to effectively manage their academic operations and provide a seamless learning experience for students.
 
