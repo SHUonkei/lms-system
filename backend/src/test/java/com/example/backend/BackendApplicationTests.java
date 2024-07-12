@@ -1,10 +1,10 @@
-package com.ksm.lmsystem;
+package com.example.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LmsystemApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
