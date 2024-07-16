@@ -13,3 +13,13 @@ A lecture management system is a software application that manages information a
 Add, delete, modify, and view instructor information
 Assign instructors to lectures
 Manage instructor workload and availability
+
+
+
+## init
+
+```
+sudo apt install maven
+mvn clean install
+mvn spring-boot:run
+```
