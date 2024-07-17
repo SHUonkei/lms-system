@@ -14,8 +14,8 @@ import com.example.backend.model.UserModel;
 @Mapper
 @Component
 public interface UserMapper {
-    @Insert("INSERT INTO USER(Id, Name, Email)"
-            + "VALUES(#{Id}, #{Name}, #{Email})")
+    @Insert("INSERT INTO USER(ID, NAME, EMAIL)"
+            + "VALUES(#{ID}, #{NAME}, #{EMAIL})")
     int insert(UserModel model);
 
     @Select("SELECT * FROM USER")

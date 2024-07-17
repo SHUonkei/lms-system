@@ -1,5 +1,7 @@
 package com.example.backend.model;
+import lombok.Data;
 
+@Data
 public class UserModel {
     private String Id;
     private String Name;

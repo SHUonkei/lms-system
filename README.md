@@ -19,7 +19,13 @@ Manage instructor workload and availability
 ## init
 
 ```
-sudo apt install maven
-mvn clean install
-mvn spring-boot:run
+apt-get update
+apt-get upgrade -y
+apt-get install -y sqlite3
 ```
+
+
+[ここから](https://github.com/xerial/sqlite-jdbc/releases/tag/3.46.0.0)
+
+sqlite-jdbc-3.46.0.0.jar
+をダウンロード

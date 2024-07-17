@@ -1,0 +1,5 @@
+CREATE TABLE students (
+	id VARCHAR PRIMARY KEY,
+	name VARCHAR,
+	email VARCHAR
+);
