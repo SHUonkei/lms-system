@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Course Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        color: #444;
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      form {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th.cell_title {
+        text-align: left;
+        padding: 10px;
+        background-color: #ddd;
+        color: #333;
+      }
+
+      td {
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button, input[type="button"] {
+        display: block;
+        width: 100px;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      button:hover, input[type="button"]:hover {
+        background-color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add Course Page</h1>
+    <div style="text-align: center;"><a th:href="@{/course/list}">Courses List Page is here</a></div>
+    <form action="#" th:action="@{/course/new}" th:object="${course}" method="post">
+      <table>
+        <tr>
+          <th class="cell_title">ID</th>
+          <td><input type="text" th:field="*{Id}"></td>
+        </tr>
+        <tr>
+          <th class="cell_title">NAME</th>
+          <td><input type="text" th:field="*{Name}"></td>
+        </tr>
+        <tr>
+          <th class="cell_title">TEACHER</th>
+          <td><input type="text" th:field="*{Teacher_Id}"></td>
+        </tr>
+        <tr>
+          <th class="cell_title">ROOM</th>
+          <td><input type="text" th:field="*{Room}"></td>
+        </tr>
+      </table>
+      <button type="submit">Add Data</button>
+      <input type="button" value="finish" onclick="window.open('about:blank', '_self').close()">
+    </form>
+  </body>
+</html>
