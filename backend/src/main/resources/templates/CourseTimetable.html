@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -13,8 +14,7 @@
             padding: 0;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             color: #000;
         }
 
@@ -36,8 +36,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        th,
-        td {
+        th, td {
             border: 1px solid #000;
             padding: 10px;
             text-align: center;
@@ -61,8 +60,7 @@
             border: 1px solid #000;
         }
 
-        select,
-        button {
+        select, button {
             padding: 10px;
             margin: 10px 0;
             width: 100%;
@@ -85,10 +83,10 @@
 
 <body>
     <h1>Timeschedule</h1>
-    <div style="text-align: center;"><a th:href="@{/studentlist}">Back to Student List Page</a></div>
-    <div style="text-align: center;"><a th:href="@{/course/list}">Back to Course List Page</a></div>
-    <div style="text-align: center;">
-        <pre th:text="${Id}"></pre>
+    <div><a th:href="@{/studentlist}">Back to Student List Page</a></div>
+    <div><a th:href="@{/course/list}">Back to Course List Page</a></div>
+    <div>
+        <pre th:text="${courseId}" style="display: none;"></pre>
         <table>
             <thead>
                 <tr>
@@ -105,18 +103,36 @@
                 <tr th:each="period : ${#numbers.sequence(1, 5)}">
                     <td th:text="${period}"></td>
                     <td th:text="${timetable['Monday'] != null ? timetable['Monday'][period.toString()] : ' - '}"></td>
-                    <td th:text="${timetable['Tuesday'] != null ? timetable['Tuesday'][period.toString()] : ' - '}">
-                    </td>
-                    <td th:text="${timetable['Wednesday'] != null ? timetable['Wednesday'][period.toString()] : ' - '}">
-                    </td>
-                    <td th:text="${timetable['Thursday'] != null ? timetable['Thursday'][period.toString()] : ' - '}">
-                    </td>
+                    <td th:text="${timetable['Tuesday'] != null ? timetable['Tuesday'][period.toString()] : ' - '}"></td>
+                    <td th:text="${timetable['Wednesday'] != null ? timetable['Wednesday'][period.toString()] : ' - '}"></td>
+                    <td th:text="${timetable['Thursday'] != null ? timetable['Thursday'][period.toString()] : ' - '}"></td>
                     <td th:text="${timetable['Friday'] != null ? timetable['Friday'][period.toString()] : ' - '}"></td>
-                    <td th:text="${timetable['Saturday'] != null ? timetable['Saturday'][period.toString()] : ' - '}">
-                    </td>
+                    <td th:text="${timetable['Saturday'] != null ? timetable['Saturday'][period.toString()] : ' - '}"></td>
                 </tr>
             </tbody>
         </table>
+        <h2>Add Period</h2>
+        <form th:action="@{/course/updateTimetable}" method="post">
+            <input type="hidden" name="courseId" th:value="${courseId}" />
+            <select name="day">
+                <option value="">-- Select Day --</option>
+                <option th:each="day : ${dayOfWeek}" th:value="${day}" th:text="${day}"></option>
+            </select>
+            <select name="period">
+                <option value="">-- Select Period --</option>
+                <option th:each="period : ${timePeriod}" th:value="${period}" th:text="${period}"></option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+        <h2>Delete Period</h2>
+        <form th:action="@{/course/deletePeriod}" method="post">
+            <input type="hidden" name="courseId" th:value="${courseId}" />
+            <select name="combination">
+                <option value="">-- Select Period to Delete --</option>
+                <option th:each="combination : ${registeredCombinations}" th:value="${combination}" th:text="${combination}"></option>
+            </select>
+            <button type="submit">Delete</button>
+        </form>
     </div>
 </body>
 

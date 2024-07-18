@@ -79,9 +79,36 @@ public class CourseController {
     }
 
     @GetMapping("course/timetable")
-    public String displayTimetable(@RequestParam("Id") String CourseId, Model model) {
-        Map<String, Map<String, String>> timetable = timetableService.getTimetableForCourse(CourseId);
+    public String displayTimetable(@RequestParam("Id") String courseId, Model model) {
+        Map<String, Map<String, String>> timetable = timetableService.getTimetableForCourse(courseId);
+        List<String> dayOfWeek = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        List<String> timePeriod = List.of("1", "2", "3", "4", "5");
+    
+        List<String> registeredCombinations = timetableService.getRegisteredCombinations(courseId);
+    
+        model.addAttribute("dayOfWeek", dayOfWeek);
         model.addAttribute("timetable", timetable);
-        return "Timetable.html";
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("timePeriod", timePeriod);
+        model.addAttribute("registeredCombinations", registeredCombinations); // 追加
+        return "CourseTimetable";
+    }
+
+    @PostMapping("course/updateTimetable")
+    public String updateTimetable(@RequestParam String courseId,
+                                  @RequestParam String day,
+                                  @RequestParam String period) {
+        timetableService.updateTimetable(courseId, day, period);
+        return "redirect:/course/timetable?Id=" + courseId;
+    }
+
+    @PostMapping("course/deletePeriod")
+    public String deletePeriod(@RequestParam String courseId,
+                               @RequestParam String combination) {
+        String[] parts = combination.split(" - Period ");
+        String day = parts[0];
+        String period = parts[1];
+        timetableService.deletePeriod(courseId, day, period);
+        return "redirect:/course/timetable?Id=" + courseId;
     }
 }
