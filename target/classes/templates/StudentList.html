@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Courses List Page</title>
+  <title>Students List Page</title>
 </head>
 
 <style>
@@ -35,8 +35,7 @@
     background-color: #fff;
   }
 
-  th,
-  td {
+  th, td {
     padding: 10px;
     border: 1px solid #ccc;
     text-align: left;
@@ -95,43 +94,33 @@
     background-color: #555;
   }
 </style>
-
 <body>
-  <h1>Courses List Page</h1>
-  <div style="text-align: center;"><a th:href="@{/course/new}">Add Course Page is Here</a></div>
+  <h1>Students List Page</h1>
+  <div style="text-align: center;"><a th:href="@{/new}">Add Student Page is Here</a></div>
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>NAME</th>
-        <th>TEACHER</th>
-        <th>ROOM</th>
+        <th>EMAIL</th>
         <th colspan="2">EDIT</th>
-        <th>Participants</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="course : ${courseTeachers}">
-        <td th:text="${course.Id}"></td>
-        <td th:text="${course.Name}"></td>
-        <td th:text="${course.Teacher_Name}"></td>
-        <td th:text="${course.Room}"></td>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.Id}"></td>
+        <td th:text="${student.Name}"></td>
+        <td th:text="${student.Email}"></td>
         <td>
-          <form th:action="@{/course/edit}" method="get">
+          <form th:action="@{/edit}" method="get">
             <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
-            <input type="hidden" name="Id" th:value="${course.Id}">
+            <input type="hidden" name="Id" th:value="${student.Id}">
           </form>
         </td>
         <td>
-          <form th:action="@{/course/delete}" method="get">
+          <form th:action="@{/delete}" method="get">
             <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
-            <input type="hidden" name="Id" th:value="${course.Id}">
-          </form>
-        </td>
-        <td>
-          <form th:action="@{/studentcourse/list}" method="get">
-            <input type="submit" class="btn btn-outline-danger" name="list" value="participants">
-            <input type="hidden" name="Id" th:value="${course.Id}">
+            <input type="hidden" name="Id" th:value="${student.Id}">
           </form>
         </td>
       </tr>

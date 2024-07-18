@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.backend.mapper.StudentCourseMapper;
 import com.example.backend.model.StudentCourseModel;
 import com.example.backend.model.CourseTeacherModel;
-
+import com.example.backend.model.StudentCourseJoinStudentModel;
 @Service
 public class StudentCourseService {
 
@@ -29,7 +29,11 @@ public class StudentCourseService {
         return dao.selectByCourseId(Course_Id);
     }
 
-    public boolean delete(String id) {
-        return dao.delete(id) > 0;
+    public List<StudentCourseJoinStudentModel> selectByCourseIdWithStudent(String Course_Id) {
+        return dao.selectByCourseIdWithStudent(Course_Id);
+    }
+
+    public boolean delete(String StudentId, String CourseId) {
+        return dao.delete(StudentId, CourseId) > 0;
     }
 }
