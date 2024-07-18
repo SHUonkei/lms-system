@@ -8,7 +8,7 @@ services:
     tty: true
     volumes:
       - ./backend:/app/
-      - /target:/app/target
+      - ./target:/app/target
     ports:
       - 8080:8080
 
