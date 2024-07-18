@@ -5,14 +5,14 @@ VALUES
   ('qtqervtr-q134-1466-3643-qwercwqercb2', 'student2', 'student2@example.com')
   ;
 
-INSERT INTO teachers (TEACHER_ID, NAME, EMAIL)
+INSERT INTO teachers (ID, NAME, EMAIL)
 VALUES
   ('wvertwre-9wer-4qwe-9wer-qwecrqew8e63', 'rootteacher', 'rootteacher@example.com'),
   ('vrtyewqc-qwer-41re-3qwe-13rqwecrqewc', 'teacher1', 'teacher1@example.com'),
   ('qqcwercr-qwer-1qwr-3qwe3-qwercqwercqq', 'teacher2', 'teacher2@example.com')
   ;
 
-INSERT INTO courses (COURSE_ID, NAME, TEACHER_ID, ROOM)
+INSERT INTO courses (ID, NAME, TEACHER_ID, ROOM)
 VALUES
   ('imtyuimt-tmyu-4345-5674-ortbqc0q8370', 'course1', 'wvertwre-9wer-4qwe-9wer-qwecrqew8e63', 'room1'),
   ('etwetvqw-23v4-4qwe-5234-5234v52rtwev', 'course2', 'vrtyewqc-qwer-41re-3qwe-13rqwecrqewc', 'room2'),

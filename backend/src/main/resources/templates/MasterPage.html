@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Mater Page</title>
+</head>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  h1 {
+    text-align: center;
+    color: #444;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  th {
+    background-color: #ddd;
+    color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn-outline-primary {
+    background-color: #555;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #333;
+  }
+
+  .btn-outline-danger {
+    background-color: #900;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #700;
+  }
+
+  input[type="button"] {
+    display: block;
+    width: 100px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  input[type="button"]:hover {
+    background-color: #555;
+  }
+</style>
+<body>
+  <h1>Master Page</h1>
+  <div style="text-align: center;"><a th:href="@{/studentlist}">Student Page is Here</a></div>
+  <div style="text-align: center;"><a th:href="@{/teacher/list}">Teacher Page is Here</a></div>
+</body>
+
+
+</html>

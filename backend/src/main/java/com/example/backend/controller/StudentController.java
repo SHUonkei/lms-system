@@ -38,9 +38,6 @@ public class StudentController {
     @GetMapping("/studentlist")
     public String displayStudents(Model model) {
         List<StudentModel> students = studentService.selectAll();
-        for (StudentModel student : students) {
-            System.out.println(student.getId() + " " + student.getName() + " " + student.getEmail());
-        }
         model.addAttribute("students", students);
         return "StudentList.html";
     }
