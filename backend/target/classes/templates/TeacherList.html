@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Students List Page</title>
+  <title>Teachers List Page</title>
 </head>
 
 <style>
@@ -95,38 +95,32 @@
   }
 </style>
 <body>
-  <h1>Students List Page</h1>
-  <div style="text-align: center;"><a th:href="@{/new}">Add Student Page is Here</a></div>
+  <h1>Teachers List Page</h1>
+  <div style="text-align: center;"><a th:href="@{/teacher/new}">Add Teacher Page is Here</a></div>
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>NAME</th>
         <th>EMAIL</th>
-        <th colspan="3">ACTIONS</th> <!-- Changed colspan to 3 to accommodate the new button -->
+        <th colspan="2">EDIT</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="student : ${students}">
-        <td th:text="${student.Id}"></td>
-        <td th:text="${student.Name}"></td>
-        <td th:text="${student.Email}"></td>
+      <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.Id}"></td>
+        <td th:text="${teacher.Name}"></td>
+        <td th:text="${teacher.Email}"></td>
         <td>
-          <form th:action="@{/edit}" method="get">
+          <form th:action="@{/teacher/edit}" method="get">
             <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
-            <input type="hidden" name="Id" th:value="${student.Id}">
+            <input type="hidden" name="Id" th:value="${teacher.Id}">
           </form>
         </td>
         <td>
-          <form th:action="@{/delete}" method="get">
+          <form th:action="@{/teacher/delete}" method="get">
             <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
-            <input type="hidden" name="Id" th:value="${student.Id}">
-          </form>
-        </td>
-        <td>
-          <form th:action="@{/timetable}" method="get">
-            <input type="submit" class="btn btn-outline-info" name="timetable" value="timetable">
-            <input type="hidden" name="Id" th:value="${student.Id}">
+            <input type="hidden" name="Id" th:value="${teacher.Id}">
           </form>
         </td>
       </tr>
