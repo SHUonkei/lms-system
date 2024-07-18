@@ -1,0 +1,17 @@
+name: lms-spring
+services:
+  lms-spring:
+    build: .
+    image: lms-spring
+    container_name: lms-spring
+    hostname: lms-spring
+    tty: true
+    volumes:
+      - ./backend:/app/
+      - /target:/app/target
+    ports:
+      - 8080:8080
+
+volumes:
+  target:
+    name: lms-spring
