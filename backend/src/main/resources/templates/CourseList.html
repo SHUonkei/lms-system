@@ -108,6 +108,7 @@
         <th>ROOM</th>
         <th colspan="2">EDIT</th>
         <th>Participants</th>
+        <th>Time Table</th>
       </tr>
     </thead>
     <tbody>
@@ -134,6 +135,13 @@
             <input type="hidden" name="Id" th:value="${course.Id}">
           </form>
         </td>
+        <td>
+          <form th:action="@{/course/timetable}" method="get">
+            <input type="submit" class="btn btn-outline-danger" name="list" value="time table">
+            <input type="hidden" name="Id" th:value="${course.Id}">
+          </form>
+        </td>
+
       </tr>
     </tbody>
   </table>

@@ -31,12 +31,23 @@ public class TimetableService {
           }
       }
       
-       // デバッグ用の出力：timetableの内容を確認
-      System.out.println("Timetable contents:");
-      timetable.forEach((key, value) -> {
-        System.out.println("Day: " + key);
-        value.forEach((period, course_Name) -> System.out.println(period + ": " + course_Name));
-      });
+      return timetable;
+  }
+
+    public Map<String, Map<String, String>> getTimetableForCourse(String courseId) {
+      List<TimetableModel> timetableList = timetableMapper.selectTimetableByCourseId(courseId);
+      Map<String, Map<String, String>> timetable = new HashMap<>();
+  
+      for (TimetableModel timeslot : timetableList) {
+          if (timeslot != null) {
+              String Day_Of_Week = timeslot.getDay_Of_Week();
+              if (Day_Of_Week != null) {
+                  timetable.computeIfAbsent(Day_Of_Week, k -> new HashMap<>())
+                           .put(timeslot.gettime_Period(), timeslot.getcourse_Name());
+              }
+          }
+      }
+      
       return timetable;
   }
 }
