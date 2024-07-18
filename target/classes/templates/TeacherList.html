@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Teachers List Page</title>
+</head>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  h1 {
+    text-align: center;
+    color: #444;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+  }
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  th {
+    background-color: #ddd;
+    color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn-outline-primary {
+    background-color: #555;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #333;
+  }
+
+  .btn-outline-danger {
+    background-color: #900;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #700;
+  }
+
+  input[type="button"] {
+    display: block;
+    width: 100px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  input[type="button"]:hover {
+    background-color: #555;
+  }
+</style>
+<body>
+  <h1>Teachers List Page</h1>
+  <div style="text-align: center;"><a th:href="@{/teacher/new}">Add Teacher Page is Here</a></div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th colspan="2">EDIT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.Id}"></td>
+        <td th:text="${teacher.Name}"></td>
+        <td th:text="${teacher.Email}"></td>
+        <td>
+          <form th:action="@{/teacher/edit}" method="get">
+            <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
+            <input type="hidden" name="Id" th:value="${teacher.Id}">
+          </form>
+        </td>
+        <td>
+          <form th:action="@{/teacher/delete}" method="get">
+            <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
+            <input type="hidden" name="Id" th:value="${teacher.Id}">
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="button" value="finish" onclick="window.open('about:blank', '_self').close()">
+</body>
+
+
+</html>

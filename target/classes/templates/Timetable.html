@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>時間割</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    th, td {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Timeschedule</h1>
+  <h2>Timetable Debug</h2>
+  <pre th:text="${Id}"></pre>
+  <table>
+    <thead>
+      <tr>
+        <th>Time/Day</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="period : ${#numbers.sequence(1, 5)}">
+        <td th:text="${period}"></td>
+        <td th:text="${timetable['Monday'] != null ? timetable['Monday'][period.toString()] : ' - '}" ></td>
+        <td th:text="${timetable['Tuesday'] != null ? timetable['Tuesday'][period.toString()] : ' - '}" ></td>
+        <td th:text="${timetable['Wednesday'] != null ? timetable['Wednesday'][period.toString()] : ' - '}" ></td>
+        <td th:text="${timetable['Thursday'] != null ? timetable['Thursday'][period.toString()] : ' - '}" ></td>
+        <td th:text="${timetable['Friday'] != null ? timetable['Friday'][period.toString()] : ' - '}" ></td>
+        <td th:text="${timetable['Saturday'] != null ? timetable['Saturday'][period.toString()] : ' - '}" ></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
