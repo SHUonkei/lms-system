@@ -1,77 +1,74 @@
-// package com.example.backend.controller;
+package com.example.backend.controller;
 
-// import java.util.List;
+import java.util.List;
 
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.validation.annotation.Validated;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-// import com.example.backend.service.CourseService;
-// import com.example.backend.service.TeacherService;
+import com.example.backend.service.CourseService;
+import com.example.backend.service.TeacherService;
+import com.example.backend.model.StudentModel;
+import com.example.backend.model.CourseModel;
+import com.example.backend.model.CourseTeacherModel;
+import com.example.backend.model.TeacherModel;
+import com.example.backend.model.StudentCourseModel;
+import com.example.backend.service.StudentService;
+import com.example.backend.service.StudentCourseService;
+import com.example.backend.model.StudentCourseJoinStudentModel;
 
-// import com.example.backend.model.CourseModel;
-// import com.example.backend.model.CourseTeacherModel;
-// import com.example.backend.model.TeacherModel;
-// import com.example.backend.model.StudentCourseModel;
-// import com.example.backend.service.StudentService;
+@Controller
+public class StudentCourseController {
+    private final CourseService courseService;
+    private final StudentService studentService;
+    private final StudentCourseService studentCourseService;
 
-// @Controller
-// public class StudentCourseController {
-//     private final CourseService courseService;
-//     private final StudentService studentService;
+    public StudentCourseController(CourseService courseService, StudentService studentService, StudentCourseService studentCourseService) {
+        this.courseService = courseService;
+        this.studentService = studentService;
+        this.studentCourseService = studentCourseService;
+    }
+    @RequestMapping("studentcourse/new")
+    public String addCourse(@RequestParam("Id") String id, Model model) {
+        List<StudentModel> students = studentService.selectAll();
+        StudentCourseModel studentcourse = new StudentCourseModel();
+        studentcourse.setCourse_Id(id);
+        model.addAttribute("studentcourse", studentcourse);
+        model.addAttribute("students", students);
+        model.addAttribute("courseId", id);
+        model.addAttribute("courseName", courseService.selectById(id).getName());
 
-//     public StudentCourseController(CourseService courseService, StudentService studentService) {
-//         this.courseService = courseService;
-//         this.studentService = studentService;
-//     }
-//     @RequestMapping("studentcourse/new")
-//     public String addCourse(Model model) {
-//         List<TeacherModel> teachers = teacherService.selectAll();
+        return "NewStudentCourse.html";
+    }
 
-//         model.addAttribute("course", new CourseModel());
-//         model.addAttribute("teachers", teachers);
+    @PostMapping("studentcourse/new")
+    public String create(@Validated @ModelAttribute StudentCourseModel studentcourse, Model model) {
+        //debud
+        System.out.println("studentcourse" + studentcourse);
+        studentCourseService.insert(studentcourse);
+        return "redirect:list?Id=" + studentcourse.getCourse_Id();
+    }
 
-//         return "NewCourse.html";
-//     }
+    @GetMapping("studentcourse/list")
+    public String displayCourses(@RequestParam("Id") String id,  Model model) {
+        List<StudentModel> students = studentService.selectAll();
+        List<StudentCourseModel> studentCourses = studentCourseService.selectByCourseId(id);
+        List<StudentCourseJoinStudentModel> studentCourseJoinStudents = studentCourseService.selectByCourseIdWithStudent(id);
+        model.addAttribute("students", students);
+        model.addAttribute("studentCourses", studentCourses);
+        model.addAttribute("studentCourseJoinStudents", studentCourseJoinStudents);
+        model.addAttribute("courseId", id);
+        return "StudentCourseList.html";
+    }
 
-//     @PostMapping("studentcourse/new")
-//     public String create(@Validated @ModelAttribute CourseModel course, Model model) {
-//         courseService.insert(course);
-//         return "redirect:list";
-//     }
-
-//     @GetMapping("studentcourse/list")
-//     public String displayCourses(@ModelAttribute CourseModel course, Model model) {
-//         List<CourseModel> courses = courseService.selectByCourseId();
-//         List<CourseTeacherModel> courseTeachers = courseService.selectAllWithTeacherName();
-//         model.addAttribute("courses", courses);
-//         model.addAttribute("courseTeachers", courseTeachers);
-//         return "CourseList.html";
-//     }
-
-//     @RequestMapping("studentcourse/edit")
-//     public String edit(@ModelAttribute CourseModel course, Model model) {
-//         CourseModel courseModel = courseService.selectById(course.getId());
-//         List<TeacherModel> teachers = teacherService.selectAll();
-//         model.addAttribute("course", courseModel);
-//         model.addAttribute("teachers", teachers);
-//         return "EditCourse.html";
-//     }
-
-//     @PostMapping("studentcourse/edit")
-//     public String update(@Validated @ModelAttribute CourseModel course, Model model) {
-//         courseService.update(course);
-//         return "redirect:list";
-//     }
-
-//     @RequestMapping("studentcourse/delete")
-//     public String delete(@RequestParam("Id") String id, Model model) {
-//         courseService.delete(id);
-//         return "redirect:list";
-//     }
-// }
+    @RequestMapping("studentcourse/delete")
+    public String delete(@RequestParam("CourseId") String CourseId, @RequestParam("StudentId") String StudentId, Model model) {
+        studentCourseService.delete(StudentId,CourseId);
+        return "redirect:list?Id=" + CourseId;
+    }
+}
