@@ -9,7 +9,7 @@ A lecture management system is a software application that manages information a
 # System Features:
 
 ## Lecture Management:
-@@ -20,13 +26,3 @@ Track student progress and grades
+Track student progress and grades
 Add, delete, modify, and view instructor information
 Assign instructors to lectures
 Manage instructor workload and availability
@@ -41,3 +41,8 @@ docker を使う場合
 ```
 mkdir target
 ```
+
+## 動作イメージ
+![image](https://github.com/user-attachments/assets/31a44216-f617-4093-951a-259dca76787c)
+![image](https://github.com/user-attachments/assets/ec357b44-9c7f-4cd6-8b7d-5468173b0038)
+![image](https://github.com/user-attachments/assets/4d4a27ec-fdbe-4584-95cd-1c05f73531ce)
