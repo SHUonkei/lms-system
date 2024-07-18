@@ -1,10 +1,11 @@
 package com.example.backend.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
+
 import com.example.backend.mapper.TimetableMapper;
 import com.example.backend.model.TimetableModel;
 
@@ -22,10 +23,10 @@ public class TimetableService {
   
       for (TimetableModel timeslot : timetableList) {
           if (timeslot != null) {
-              String dayOfWeek = timeslot.getDayOfWeek();
-              if (dayOfWeek != null) {
-                  timetable.computeIfAbsent(dayOfWeek, k -> new HashMap<>())
-                           .put(timeslot.getTimePeriod(), timeslot.getCourseName());
+              String Day_Of_Week = timeslot.getDay_Of_Week();
+              if (Day_Of_Week != null) {
+                  timetable.computeIfAbsent(Day_Of_Week, k -> new HashMap<>())
+                           .put(timeslot.gettime_Period(), timeslot.getcourse_Name());
               }
           }
       }
@@ -34,7 +35,7 @@ public class TimetableService {
       System.out.println("Timetable contents:");
       timetable.forEach((key, value) -> {
         System.out.println("Day: " + key);
-        value.forEach((period, courseName) -> System.out.println(period + ": " + courseName));
+        value.forEach((period, course_Name) -> System.out.println(period + ": " + course_Name));
       });
       return timetable;
   }

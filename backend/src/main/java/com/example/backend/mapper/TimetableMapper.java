@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
 import com.example.backend.model.TimetableModel;
 
 @Mapper
@@ -15,3 +16,4 @@ public interface TimetableMapper {
             "WHERE sc.STUDENT_ID = #{studentId}")
     List<TimetableModel> selectTimetableByStudentId(String studentId);
 }
+
