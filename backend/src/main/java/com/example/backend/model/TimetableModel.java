@@ -8,6 +8,7 @@ public class TimetableModel {
     private String Day_Of_Week;
     private String time_Period;
     private String course_Name;
+    private String course_id;
 
     // Getter and Setter for Day_Of_Week
     public String getDay_Of_Week() {
@@ -31,6 +32,14 @@ public class TimetableModel {
     }
     public void setcourse_Name(String course_Name) {
         this.course_Name = course_Name;
+    }
+
+    // Getter and Setter for course_id
+    public String getcourse_id() {
+        return course_id;
+    }
+    public void setcourse_id(String course_id) {
+        this.course_id = course_id;
     }
 }
 
