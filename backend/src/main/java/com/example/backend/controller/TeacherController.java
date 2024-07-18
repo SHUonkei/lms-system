@@ -32,7 +32,7 @@ public class TeacherController {
     @PostMapping("teacher/new")
     public String create(@Validated @ModelAttribute TeacherModel Teacher, Model model) {
         TeacherService.insert(Teacher);
-        return "redirect:Teacherlist";
+        return "redirect:list";
     }
 
     @GetMapping("teacher/list")
@@ -52,7 +52,7 @@ public class TeacherController {
     @PostMapping("teacher/edit")
     public String update(@Validated @ModelAttribute TeacherModel Teacher, Model model) {
         TeacherService.update(Teacher);
-        return "redirect:Teacherlist";
+        return "redirect:list";
     }
 
     @RequestMapping("teacher/delete")

@@ -2,7 +2,6 @@ package com.example.backend.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.mapper.StudentMapper;
@@ -13,7 +12,6 @@ public class StudentService {
 
     private final StudentMapper dao;
 
-    @Autowired
     public StudentService(StudentMapper dao) {
         this.dao = dao;
     }

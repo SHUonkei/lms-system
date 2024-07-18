@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Mater Page</title>
+  <title>Courses List Page</title>
 </head>
 
 <style>
@@ -95,10 +95,40 @@
   }
 </style>
 <body>
-  <h1>Master Page</h1>
-  <div style="text-align: center;"><a th:href="@{/studentlist}">Student Page is Here</a></div>
-  <div style="text-align: center;"><a th:href="@{/teacher/list}">Teacher Page is Here</a></div>
-  <div style="text-align: center;"><a th:href="@{/course/list}">Course Page is Here</a></div>
+  <h1>Courses List Page</h1>
+  <div style="text-align: center;"><a th:href="@{/course/new}">Add Course Page is Here</a></div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>TEACHER</th>
+        <th>ROOM</th>
+        <th colspan="2">EDIT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="course : ${courses}">
+        <td th:text="${course.Id}"></td>
+        <td th:text="${course.Name}"></td>
+        <td th:text="${course.Teacher_Id}"></td>
+        <td th:text="${course.Room}"></td>
+        <td>
+          <form th:action="@{/course/edit}" method="get">
+            <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
+            <input type="hidden" name="Id" th:value="${course.Id}">
+          </form>
+        </td>
+        <td>
+          <form th:action="@{/course/delete}" method="get">
+            <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
+            <input type="hidden" name="Id" th:value="${course.Id}">
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="button" value="finish" onclick="window.open('about:blank', '_self').close()">
 </body>
 
 
