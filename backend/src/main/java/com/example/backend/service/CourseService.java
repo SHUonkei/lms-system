@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend.mapper.CourseMapper;
 import com.example.backend.model.CourseModel;
+import com.example.backend.model.CourseTeacherModel;
 
 @Service
 public class CourseService {
@@ -22,6 +23,10 @@ public class CourseService {
 
     public List<CourseModel> selectAll() {
         return dao.selectAll();
+    }
+
+    public List<CourseTeacherModel> selectAllWithTeacherName() {
+        return dao.selectAllWithTeacherName();
     }
 
     public CourseModel selectById(String id) {

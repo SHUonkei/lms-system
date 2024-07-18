@@ -108,10 +108,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr th:each="course : ${courses}">
+      <tr th:each="course : ${courseTeachers}">
         <td th:text="${course.Id}"></td>
         <td th:text="${course.Name}"></td>
-        <td th:text="${course.Teacher_Id}"></td>
+        <td th:text="${course.Teacher_Name}"></td>
         <td th:text="${course.Room}"></td>
         <td>
           <form th:action="@{/course/edit}" method="get">
