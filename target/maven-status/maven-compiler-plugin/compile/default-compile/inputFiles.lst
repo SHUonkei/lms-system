@@ -1,0 +1,7 @@
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/BackendApplication.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/config/MyBatisConfig.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/config/MyBatisMapperScannerConfig.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/controller/UserController.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/mapper/UserMapper.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/model/UserModel.java
+/home/shu/workspace/school/grade3/javapro/jsb-lms-2024/app/backend/src/main/java/com/example/backend/service/UserService.java

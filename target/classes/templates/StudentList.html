@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Students List Page</title>
+</head>
+
+<body>
+  <h1>Students List Page</h1>
+  <div><a th:href="@{/new}">Add Student Page is Here</a></div>
+  <table>
+    <thead>
+      <tr>
+        <th>STUDENT_ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th colspan="2">EDIT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.Id}"></td>
+        <td th:text="${student.Name}"></td>
+        <td th:text="${student.Email}"></td>
+        <td>
+          <form th:action="@{/edit}" method="get">
+            <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
+            <input type="hidden" name="Id" th:value="${student.Id}">
+          </form>
+        </td>
+        <td>
+          <form th:action="@{/delete}" method="get">
+            <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
+            <input type="hidden" name="Id" th:value="${student.Id}">
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="button" value="finish" onclick="window.open('about:blank', '_self').close()">
+</body>
+
+</html>
