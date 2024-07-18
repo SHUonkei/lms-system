@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import com.example.backend.model.CourseModel;
+import com.example.backend.model.CourseTeacherModel;
 @Mapper
 public interface CourseMapper {
     @Insert("INSERT INTO courses(ID, NAME, TEACHER_ID, ROOM)"
@@ -16,6 +17,9 @@ public interface CourseMapper {
 
     @Select("SELECT * FROM courses")
     List<CourseModel> selectAll();
+ 
+    @Select("SELECT c.ID, c.NAME , c.ROOM, t.NAME as TEACHER_NAME FROM courses c join teachers t on t.ID=c.TEACHER_ID")
+    List<CourseTeacherModel> selectAllWithTeacherName();
 
     @Select("SELECT * FROM courses WHERE ID = #{Id}")
     CourseModel selectById(String Id);

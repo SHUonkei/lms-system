@@ -13,19 +13,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.backend.model.CourseModel;
 import com.example.backend.service.CourseService;
+import com.example.backend.service.TeacherService;
+import com.example.backend.model.CourseTeacherModel;
+
+import com.example.backend.model.TeacherModel;
 
 @Controller
 public class CourseController {
     private final CourseService courseService;
+    private final TeacherService teacherService;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, TeacherService teacherService) {
         this.courseService = courseService;
-
+        this.teacherService = teacherService;
     }
-
     @RequestMapping("course/new")
     public String addCourse(Model model) {
+        List<TeacherModel> teachers = teacherService.selectAll();
+
         model.addAttribute("course", new CourseModel());
+        model.addAttribute("teachers", teachers);
+
         return "NewCourse.html";
     }
 
@@ -38,16 +46,18 @@ public class CourseController {
     @GetMapping("course/list")
     public String displayCourses(Model model) {
         List<CourseModel> courses = courseService.selectAll();
+        List<CourseTeacherModel> courseTeachers = courseService.selectAllWithTeacherName();
         model.addAttribute("courses", courses);
-        //debug
-        System.out.println("courses: " + courses);
+        model.addAttribute("courseTeachers", courseTeachers);
         return "CourseList.html";
     }
 
     @RequestMapping("course/edit")
     public String edit(@ModelAttribute CourseModel course, Model model) {
         CourseModel courseModel = courseService.selectById(course.getId());
+        List<TeacherModel> teachers = teacherService.selectAll();
         model.addAttribute("course", courseModel);
+        model.addAttribute("teachers", teachers);
         return "EditCourse.html";
     }
 
