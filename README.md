@@ -34,3 +34,10 @@ mvn install
 ```
 backend/src/main/java/com/example/backend/BackendApplication.java
 ```
+
+
+docker を使う場合
+
+```
+mkdir target
+```
