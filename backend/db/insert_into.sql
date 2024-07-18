@@ -31,7 +31,7 @@ VALUES
   ('vv23342r-tybe-tttt-1371-aaaaastv34v2', 'Friday', '1')
   ;
 
-INSERT INTO student_courses (ID, COURSE_ID)
+INSERT INTO student_courses (STUDENT_ID, COURSE_ID)
 VALUES
   ('qqwcerwd-qcew-4128-3435-13r4ce3546b1', 'imtyuimt-tmyu-4345-5674-ortbqc0q8370'),
   ('qqwcerwd-qcew-4128-3435-13r4ce3546b1', 'etwetvqw-23v4-4qwe-5234-5234v52rtwev'),
