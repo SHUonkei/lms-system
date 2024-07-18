@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +18,19 @@ import com.example.backend.service.TeacherService;
 import com.example.backend.model.CourseTeacherModel;
 
 import com.example.backend.model.TeacherModel;
+import com.example.backend.model.TimetableModel;
+import com.example.backend.service.TimetableService;
 
 @Controller
 public class CourseController {
     private final CourseService courseService;
     private final TeacherService teacherService;
+    private final TimetableService timetableService;
 
-    public CourseController(CourseService courseService, TeacherService teacherService) {
+    public CourseController(CourseService courseService, TeacherService teacherService, TimetableService timetableService) {
         this.courseService = courseService;
         this.teacherService = teacherService;
+        this.timetableService = timetableService;
     }
     @RequestMapping("course/new")
     public String addCourse(Model model) {
@@ -71,5 +76,12 @@ public class CourseController {
     public String delete(@RequestParam("Id") String id, Model model) {
         courseService.delete(id);
         return "redirect:list";
+    }
+
+    @GetMapping("course/timetable")
+    public String displayTimetable(@RequestParam("Id") String CourseId, Model model) {
+        Map<String, Map<String, String>> timetable = timetableService.getTimetableForCourse(CourseId);
+        model.addAttribute("timetable", timetable);
+        return "Timetable.html";
     }
 }
