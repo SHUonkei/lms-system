@@ -14,6 +14,8 @@ Add, delete, modify, and view instructor information
 Assign instructors to lectures
 Manage instructor workload and availability
 
+## er figure
+![image](https://github.com/user-attachments/assets/743f1f23-b2e7-4e4a-b323-a75a3135480c)
 
 
 ## init
