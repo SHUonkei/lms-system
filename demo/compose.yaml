@@ -1,0 +1,15 @@
+name: lms-system-demo
+
+# デモ用
+services:
+  lms-system-demo:
+    build:
+      context: ..
+      dockerfile: Dockerfile.demo
+    image: lms-system-demo
+    container_name: lms-system-demo
+    hostname: lms-system-demo
+    tty: true
+    working_dir: /app
+    ports:
+      - 8080:8080
