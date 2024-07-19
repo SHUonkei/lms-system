@@ -19,6 +19,12 @@ public interface TimetableMapper {
     List<TimetableModel> selectTimetableByStudentId(String studentId);
 
     @Select("SELECT ct.DAY_OF_WEEK, ct.TIME_PERIOD, c.NAME AS COURSE_NAME, c.ID AS COURSE_ID " +
+        "FROM courses c " +
+        "JOIN course_timeslots ct ON c.ID = ct.COURSE_ID " +
+        "WHERE c.TEACHER_ID = #{teacherId}")
+List<TimetableModel> selectTimetableByTeacherId(String teacherId);
+
+    @Select("SELECT ct.DAY_OF_WEEK, ct.TIME_PERIOD, c.NAME AS COURSE_NAME, c.ID AS COURSE_ID " +
             "FROM course_timeslots ct " +
             "JOIN courses c ON c.ID = ct.COURSE_ID " +
             "WHERE ct.COURSE_ID = #{courseId}")
