@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
@@ -57,6 +56,11 @@
         border-radius: 4px;
       }
 
+      .error {
+        color: red;
+        font-size: 0.8em;
+      }
+
       button, input[type="button"] {
         display: block;
         width: 100px;
@@ -82,15 +86,24 @@
       <table>
         <tr>
           <th class="cell_title">ID</th>
-          <td><input type="text" th:field="*{Id}"></td>
+          <td>
+            <input type="text" th:field="*{Id}">
+            <div th:if="${#fields.hasErrors('Id')}" th:errors="*{Id}" class="error"></div>
+          </td>
         </tr>
         <tr>
           <th class="cell_title">NAME</th>
-          <td><input type="text" th:field="*{Name}"></td>
+          <td>
+            <input type="text" th:field="*{Name}">
+            <div th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}" class="error"></div>
+          </td>
         </tr>
         <tr>
           <th class="cell_title">EMAIL</th>
-          <td><input type="text" th:field="*{Email}"></td>
+          <td>
+            <input type="text" th:field="*{Email}">
+            <div th:if="${#fields.hasErrors('Email')}" th:errors="*{Email}" class="error"></div>
+          </td>
         </tr>
       </table>
       <button type="submit">Add Data</button>
