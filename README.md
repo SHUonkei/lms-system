@@ -36,7 +36,7 @@ A lecture management system is a software application that manages information a
 
 #### 必要なもの
 
-　devcon-gnpr-202312 を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です.
+　開発環境を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です.
 
 #### Docker
 
