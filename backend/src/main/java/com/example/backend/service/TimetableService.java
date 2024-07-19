@@ -23,8 +23,8 @@ public class TimetableService {
         return convertToMap(timetableList);
     }
 
-    public Map<String, Map<String, String>> getTimetableForCourse(String courseId) {
-        List<TimetableModel> timetableList = timetableMapper.selectTimetableByCourseId(courseId);
+    public Map<String, Map<String, String>> getTimetableForTeacher(String teacherId) {
+        List<TimetableModel> timetableList = timetableMapper.selectTimetableByTeacherId(teacherId);
         return convertToMap(timetableList);
     }
 
@@ -45,9 +45,15 @@ public class TimetableService {
                 }
             }
         }
-        
+
         return timetable;
     }
+
+    public Map<String, Map<String, String>> getTimetableForCourse(String courseId) {
+        List<TimetableModel> timetableList = timetableMapper.selectTimetableByCourseId(courseId);
+        return convertToMap(timetableList);
+    }
+
     public void deletePeriod(String courseId, String day, String period) {
         timetableMapper.deleteTimetableEntry(courseId, day, period);
     }
