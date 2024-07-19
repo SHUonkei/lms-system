@@ -1,0 +1,37 @@
+FROM eclipse-temurin:21 AS build-env
+
+# ビルド用にソースコードをコピー
+COPY ./backend /app
+
+# 作業用ディレクトリーは /app とします.
+WORKDIR /app
+
+# 最新の状態にしてから作業
+RUN apt-get update && apt-get upgrade -y
+
+# 必要なパッケージの用意
+RUN apt-get install -y maven sqlite3
+
+# ビルドに必要な Java パッケージのインストール
+RUN mvn install
+
+# 実行用 JAR ファイルのパッケージ化
+RUN mvn package
+
+########
+# 実際に使用するコンテナー用のイメージをビルドする処理
+FROM eclipse-temurin:21
+
+# ビルド環境から必要なファイルをコピー
+COPY --from=build-env /app/target/backend-0.0.1-SNAPSHOT.jar /app/backend-0.0.1-SNAPSHOT.jar
+COPY --from=build-env /app/db /app/db
+WORKDIR /app
+
+# コンテナー内の apt パッケージは最新の状態にしておく
+# また、不要なファイルは削除しておく
+RUN apt-get update && apt-get upgrade -y && \
+    apt autoremove -y && \
+    rm -rf /var/cache/apt /var/lib/apt/lists
+
+# コンテナー起動時のエントリーポイントでは java コマンドで Spring アプリを起動
+ENTRYPOINT [ "java", "-jar", "/app/backend-0.0.1-SNAPSHOT.jar" ]
