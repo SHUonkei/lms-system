@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.backend.mapper.CourseMapper;
 import com.example.backend.model.CourseModel;
 import com.example.backend.model.CourseTeacherModel;
+import com.example.backend.model.CourseTimeSlotModel;
 
 @Service
 public class CourseService {
@@ -15,6 +16,9 @@ public class CourseService {
 
     public CourseService(CourseMapper dao) {
         this.dao = dao;
+    }
+    public List<CourseTimeSlotModel> getCourseTimeSlots(String courseId) {
+        return dao.selectTimeSlotsByCourseId(courseId);
     }
 
     public boolean insert(CourseModel course) {

@@ -8,6 +8,8 @@ import com.example.backend.mapper.StudentCourseMapper;
 import com.example.backend.model.StudentCourseModel;
 import com.example.backend.model.CourseTeacherModel;
 import com.example.backend.model.StudentCourseJoinStudentModel;
+import com.example.backend.model.CourseTimeSlotModel;
+
 @Service
 public class StudentCourseService {
 
@@ -35,5 +37,18 @@ public class StudentCourseService {
 
     public boolean delete(String StudentId, String CourseId) {
         return dao.delete(StudentId, CourseId) > 0;
+    }
+
+    public boolean checkStudentConflict(String studentId, List<CourseTimeSlotModel> courseTimeSlots) {
+        
+        for (CourseTimeSlotModel slot : courseTimeSlots) {
+            if (slot==null) {
+                continue;
+            }
+            else if (dao.checkStudentConflict(studentId, slot.getDayOfWeek(), slot.getTimePeriod()) > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

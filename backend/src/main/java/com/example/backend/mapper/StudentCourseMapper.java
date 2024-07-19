@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import com.example.backend.model.StudentCourseModel;
 import com.example.backend.model.StudentCourseJoinStudentModel;
@@ -26,4 +27,13 @@ public interface StudentCourseMapper {
     
     @Delete("DELETE FROM student_courses WHERE STUDENT_ID = #{StudentId} and COURSE_ID = #{Course_Id}")
     int delete(String StudentId, String Course_Id);
+
+    @Select("SELECT COUNT(*) FROM student_courses sc " +
+            "JOIN course_timeslots cts ON sc.COURSE_ID = cts.COURSE_ID " +
+            "WHERE sc.STUDENT_ID = #{studentId} " +
+            "AND cts.DAY_OF_WEEK = #{dayOfWeek} " +
+            "AND cts.TIME_PERIOD = #{timePeriod}")
+    int checkStudentConflict(@Param("studentId") String studentId, 
+                             @Param("dayOfWeek") String dayOfWeek, 
+                             @Param("timePeriod") String timePeriod);
 }

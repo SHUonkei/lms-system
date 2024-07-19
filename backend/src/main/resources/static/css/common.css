@@ -15,7 +15,7 @@ body {
   position: relative;
   z-index: 1000; /* Ensure it stays on top */
 }
-.header-area h2 {
+.header-area h3 {
   font-size: 24px;
   margin: 0;
   z-index: 1001; /* Ensure text is on top */

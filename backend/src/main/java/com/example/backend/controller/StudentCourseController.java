@@ -16,6 +16,7 @@ import com.example.backend.service.TeacherService;
 import com.example.backend.model.StudentModel;
 import com.example.backend.model.CourseModel;
 import com.example.backend.model.CourseTeacherModel;
+import com.example.backend.model.CourseTimeSlotModel;
 import com.example.backend.model.TeacherModel;
 import com.example.backend.model.StudentCourseModel;
 import com.example.backend.service.StudentService;
@@ -34,25 +35,37 @@ public class StudentCourseController {
         this.studentCourseService = studentCourseService;
     }
     @RequestMapping("studentcourse/new")
-    public String addCourse(@RequestParam("Id") String id, Model model) {
-        List<StudentModel> students = studentService.selectAll();
-        StudentCourseModel studentcourse = new StudentCourseModel();
-        studentcourse.setCourse_Id(id);
-        model.addAttribute("studentcourse", studentcourse);
-        model.addAttribute("students", students);
-        model.addAttribute("courseId", id);
-        model.addAttribute("courseName", courseService.selectById(id).getName());
+        public String addCourse(@RequestParam("Id") String id, Model model) {
+            List<StudentModel> students = studentService.selectAll();
+            StudentCourseModel studentcourse = new StudentCourseModel();
+            studentcourse.setCourse_Id(id);
+            model.addAttribute("studentcourse", studentcourse);
+            model.addAttribute("students", students);
+            model.addAttribute("courseId", id);
+            model.addAttribute("courseName", courseService.selectById(id).getName());
 
-        return "NewStudentCourse.html";
-    }
-
-    @PostMapping("studentcourse/new")
-    public String create(@Validated @ModelAttribute StudentCourseModel studentcourse, Model model) {
-        //debud
-        System.out.println("studentcourse" + studentcourse);
-        studentCourseService.insert(studentcourse);
-        return "redirect:list?Id=" + studentcourse.getCourse_Id();
-    }
+            List<CourseTimeSlotModel> courseTimeSlots = courseService.getCourseTimeSlots(id);
+            model.addAttribute("courseTimeSlots", courseTimeSlots);
+            System.out.println("wassawassawwasawsawsaw"+courseTimeSlots);
+            
+            return "NewStudentCourse.html";
+        }
+        
+        @PostMapping("studentcourse/new")
+        public String create(@Validated @ModelAttribute StudentCourseModel studentcourse, Model model) {
+            List<CourseTimeSlotModel> courseTimeSlots = courseService.getCourseTimeSlots(studentcourse.getCourse_Id());
+            System.out.println("wassawassawwasawsawsaw"+courseTimeSlots);
+            
+            boolean hasConflict = studentCourseService.checkStudentConflict(studentcourse.getStudent_Id(), courseTimeSlots);
+                
+                if (hasConflict) {
+                    model.addAttribute("error", "Student has time conflict with other course");
+                    return "NewStudentCourse.html";
+                }
+                
+                studentCourseService.insert(studentcourse);
+                return "redirect:list?Id=" + studentcourse.getCourse_Id();
+            }
 
     @GetMapping("studentcourse/list")
     public String displayCourses(@RequestParam("Id") String id,  Model model) {
