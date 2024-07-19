@@ -36,14 +36,14 @@ A lecture management system is a software application that manages information a
 
 #### 必要なもの
 
-　開発環境を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です.
+開発環境を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です.
 
 #### Docker
 
 - [Docker Engine](https://docs.docker.com/engine/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-　これらは [Docker Desktop](https://docs.docker.com/desktop/) をインストールしてあれば使えます.Linux では Docker Desktop をインストールしなくても Docker Engine と Docker Compose だけをインストールして使えます.Ubuntuの場合,  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) を参照してインストールしてください.
+これらは [Docker Desktop](https://docs.docker.com/desktop/) をインストールしてあれば使えます.Linux では Docker Desktop をインストールしなくても Docker Engine と Docker Compose だけをインストールして使えます.Ubuntuの場合,  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) を参照してインストールしてください.
 
 #### Visual Studio Code
 
