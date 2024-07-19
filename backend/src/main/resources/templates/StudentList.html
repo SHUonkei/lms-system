@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Students List Page</title>
+  <title>Students List Page</title>]
+  <head th:replace="header :: meta_header('StudentList Page', links, scripts)">
+    <th:block th:replace="header :: meta_header('StudentList Page', null, null)"/>
 </head>
 
 <style>
@@ -105,6 +107,7 @@
 </style>
 
 <body>
+  <div th:replace="header :: header"></div>
   <h1>Students List Page</h1>
   <div style="text-align: center;"><a th:href="@{/new}">Add Student Page is Here</a></div>
   <table>

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="meta_header(title,links,scripts)">
+    <meta charset="UTF-8">
+    <title th:text="${title}+' | sample app'">各ページタイトル | sample app</title>
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.hamburger').addEventListener('click', function(){
+          this.classList.toggle('active');
+          document.querySelector('.slide-menu').classList.toggle('active');
+        });
+      });
+    </script>
+</head>
+<body>
+  <header th:fragment="header">
+    <div class="header-area">
+      <h2>LMSystem</h2>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <ul class="slide-menu">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/course/list}">Course List</a></li>
+      <li><a th:href="@{/course/new}">Course Add</a></li>
+      <li><a th:href="@{/studentlist}">Student List</a></li>
+      <li><a th:href="@{/new}">Student Add</a></li>
+      <li><a th:href="@{/teacher/list}">Teacher List</a></li>
+      <li><a th:href="@{/teacher/new}">Teacher Add</a></li>
+      <!-- Add other page links here -->
+    </ul>
+  </header>
+</body>
+</html>

@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Time Table</title>
+    <head th:replace="header :: meta_header('CourseTimetable Page', links, scripts)">
+        <th:block th:replace="header :: meta_header('CourseTimetable Page', null, null)"/>
+</head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +16,7 @@
             margin: 0;
             padding: 0;
         }
-
+        
         h1, h2 {
             color: #000;
         }
@@ -79,9 +82,8 @@
             background-color: #555;
         }
     </style>
-</head>
-
 <body>
+    <div th:replace="header :: header"></div>
     <h1>Timeschedule</h1>
     <div><a th:href="@{/studentlist}">Back to Student List Page</a></div>
     <div><a th:href="@{/course/list}">Back to Course List Page</a></div>
