@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>共通ヘッダ</title>
+  <style>
+    /* スタイルをここに追加 */
+    .menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: #333;
+    }
+
+    .menu a {
+      padding: 15px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu a:hover {
+      background-color: #575757;
+    }
+
+    .menu-btn {
+      background-color: #333;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    @media (min-width: 600px) {
+      .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .menu-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleMenu()">☰ メニュー</button>
+    <div class="menu" id="menu">
+      <a th:href="@{/}">Home</a>
+      <a th:href="@{/course/list}">Course List</a>
+      <!-- 他のページのリンクもここに追加 -->
+    </div>
+  </header>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("menu");
+      if (menu.style.display === "flex") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "flex";
+      }
+    }
+  </script>
+</body>
+</html>
