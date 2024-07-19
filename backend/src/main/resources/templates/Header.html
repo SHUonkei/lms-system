@@ -8,7 +8,7 @@
         overflow-x: hidden;
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #f0f0f0; /* 背景色を薄いグレーに設定 */
+        background-color: #f0f0f0;
       }
       .header-area {
         display: flex;
@@ -16,12 +16,15 @@
         height: 65px;
         padding: 0 20px;
         align-items: center;
-        background-color: #333; /* ヘッダー背景色を濃いグレーに設定 */
-        color: white; /* テキスト色を白に設定 */
+        background-color: #333;
+        color: white;
+        position: relative;
+        z-index: 1000; /* Ensure it stays on top */
       }
-      .header-area h1 {
+      .header-area h2 {
         font-size: 24px;
         margin: 0;
+        z-index: 1001; /* Ensure text is on top */
       }
       .hamburger {
         width: 30px;
@@ -30,6 +33,7 @@
         flex-direction: column;
         justify-content: space-around;
         cursor: pointer;
+        z-index: 1001; /* Ensure the hamburger icon is on top */
       }
       .hamburger span {
         width: 100%;
@@ -38,13 +42,14 @@
         transition: 0.5s;
       }
       .slide-menu {
-        background-color: #444; /* スライドメニューの背景色を少し明るめのグレーに設定 */
+        background-color: #444;
         position: fixed;
         top: 65px;
         width: 100%;
         left: 0;
         transform: translateX(100%);
         transition: 0.5s;
+        z-index: 1000; /* Ensure it slides over content */
       }
       .slide-menu li {
         color: white;
@@ -62,7 +67,7 @@
         transition: background-color 0.3s;
       }
       .slide-menu li a:hover {
-        background-color: #555; /* ホバー時の背景色を設定 */
+        background-color: #555;
       }
       .hamburger.active span:first-of-type {
         transform: rotate(45deg) translate(5px, 5px);
@@ -89,7 +94,7 @@
 <body>
   <header th:fragment="header">
     <div class="header-area">
-      <h1>ロゴ</h1>
+      <h2>LMSystem</h2>
       <div class="hamburger">
         <span></span>
         <span></span>
@@ -104,7 +109,7 @@
       <li><a th:href="@{/new}">Student Add</a></li>
       <li><a th:href="@{/teacher/list}">Teacher List</a></li>
       <li><a th:href="@{/teacher/new}">Teacher Add</a></li>
-      <!-- 他のページのリンクもここに追加 -->
+      <!-- Add other page links here -->
     </ul>
   </header>
 </body>
