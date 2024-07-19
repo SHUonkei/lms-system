@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Mater Page</title>
+  <head th:replace="header :: meta_header('Home Page', links, scripts)">
+    <th:block th:replace="header :: meta_header('Home Page', null, null)"/>
 </head>
 
 <style>
@@ -94,7 +96,11 @@
     background-color: #555;
   }
 </style>
+
 <body>
+  <div th:replace="header :: header"></div>
+
+
   <h1>Master Page</h1>
   <div style="text-align: center;"><a th:href="@{/studentlist}">Student List Page</a></div>
   <div style="text-align: center;"><a th:href="@{/teacher/list}">Teacher List Page</a></div>

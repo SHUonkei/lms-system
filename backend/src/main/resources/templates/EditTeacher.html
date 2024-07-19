@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Edit Teacher Page</title>
+  </head>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -78,8 +79,8 @@
         background-color: #eee;
       }
     </style>
-  </head>
   <body>
+    <div th:replace="header :: header"></div>
     <h1>Edit Teacher Page</h1>
     <div style="text-align: center;"><a th:href="@{/teacher/list}">Teachers List Page is here</a></div>
     <form action="#" th:action="@{/teacher/edit}" th:object="${teacher}" method="post">
