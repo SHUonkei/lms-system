@@ -7,8 +7,11 @@ services:
     hostname: lms-spring
     tty: true
     volumes:
-      - ./backend:/app/
-      - ./target:/app/target
+      - type: bind
+        source: ./backend
+        target: /app/
+    tmpfs:
+      - /app/target
     ports:
       - 8080:8080
 

@@ -55,8 +55,9 @@ A lecture management system is a software application that manages information a
 
 ### 使い方
 
+カレントディレクトリーを、この README.md ファイルがあるディレクトリーにして作業します. vscodeを起動します.
+
 ```console
-mkdir target
 code .
 ```
 
@@ -64,7 +65,6 @@ vscodeが起動すると,  右下に通知が表示されるので, その中の
 
 ```console
 cd /app
-mvn clean
 mvn install
 ```
 
@@ -99,7 +99,6 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y maven sqlite3
 cd backend
-mvn clean
 mvn install
 ```
 
