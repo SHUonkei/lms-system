@@ -1,109 +1,63 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <head th:replace="header :: meta_header('Home Page', links, scripts)">
-    <meta charset="UTF-8" />
-    <title>Mater Page</title>  
-    <th:block th:replace="header :: meta_header('Home Page', null, null)"/>
-  </head>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-  }
+<head>
+  <meta charset="UTF-8" />
+  <title>Master Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
 
-  h1 {
-    text-align: center;
-    color: #444;
-  }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin: 40px 0;
+      font-size: 36px;
+    }
 
-  a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-  }
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
 
-  a:hover {
-    text-decoration: underline;
-  }
+    a.btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 15px;
+      border-radius: 8px;
+      background-color: #555;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      transition: background-color 0.3s, transform 0.3s;
+    }
 
-  table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: #fff;
-  }
+    a.btn:hover {
+      background-color: #333;
+      transform: translateY(-3px);
+    }
 
-  th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-
-  th {
-    background-color: #ddd;
-    color: #333;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tr:hover {
-    background-color: #e0e0e0;
-  }
-
-  .btn {
-    padding: 5px 10px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  .btn-outline-primary {
-    background-color: #555;
-  }
-
-  .btn-outline-primary:hover {
-    background-color: #333;
-  }
-
-  .btn-outline-danger {
-    background-color: #900;
-  }
-
-  .btn-outline-danger:hover {
-    background-color: #700;
-  }
-
-  input[type="button"] {
-    display: block;
-    width: 100px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  input[type="button"]:hover {
-    background-color: #555;
-  }
-</style>
+    a.btn:active {
+      transform: translateY(1px);
+    }
+  </style>
+</head>
 
 <body>
   <div th:replace="header :: header"></div>
 
 
   <h1>Master Page</h1>
-  <div style="text-align: center;"><a th:href="@{/studentlist}">Student List Page</a></div>
-  <div style="text-align: center;"><a th:href="@{/teacher/list}">Teacher List Page</a></div>
-  <div style="text-align: center;"><a th:href="@{/course/list}">Course List Page</a></div>
+  <div style="text-align: center;">
+    <a th:href="@{/studentlist}" class="btn">Student List Page</a>
+    <a th:href="@{/teacher/list}" class="btn">Teacher List Page</a>
+    <a th:href="@{/course/list}" class="btn">Course List Page</a>
+  </div>
 </body>
-
 
 </html>
