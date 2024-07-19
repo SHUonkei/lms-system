@@ -12,25 +12,27 @@ lmssystem/
 └── demo/ ... デモ用
 ```
 
+## Systemについて
+
+A lecture management system is a software application that manages information about lectures, students, and instructors. For each lecture, there is detailed information such as the lecture name, classroom, lecture day and time, instructor, and a list of enrolled students. For students, there is detailed information such as name, student ID, and enrolled lectures. For instructors, there is detailed information such as name, instructor ID, and assigned lectures.
+
+### Target Users
+
+- Administrative staff: Maintain student records and manage enrollment data
+
+### ER figure
+
+![image](https://github.com/user-attachments/assets/743f1f23-b2e7-4e4a-b323-a75a3135480c)
+
 ## デモ環境について
 
 デモ用の Docker イメージ をビルドして、それを使って Docker コンテナーを起動することで、デモを利用できるようになります。
 
 説明は `demo/README.md` にありますので、そちらを参照してください。
 
-## System
+## 開発環境について
 
-A lecture management system is a software application that manages information about lectures, students, and instructors. For each lecture, there is detailed information such as the lecture name, classroom, lecture day and time, instructor, and a list of enrolled students. For students, there is detailed information such as name, student ID, and enrolled lectures. For instructors, there is detailed information such as name, instructor ID, and assigned lectures.
-
-## Target Users
-
-- Administrative staff: Maintain student records and manage enrollment data
-
-## er figure
-
-![image](https://github.com/user-attachments/assets/743f1f23-b2e7-4e4a-b323-a75a3135480c)
-
-## 開発環境構築
+我々はdockerの開発コンテナを利用して開発した. 同じ状態で開発環境を用意するには以下の 「dockerの開発コンテナを使う場合」 を参照されたい. 一方で, dockerを使用せずともJavaの開発環境があれば, 開発ができる. その場合については, 後述の「docker を使わない場合」を参照されたい.
 
 ### dockerの開発コンテナを使う場合
 
