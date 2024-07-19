@@ -3,7 +3,7 @@ FROM eclipse-temurin:21 AS build-env
 # ビルド用にソースコードをコピー
 COPY ./backend /app
 
-# 作業用ディレクトリーは /app とします。
+# 作業用ディレクトリーは /app とします.
 WORKDIR /app
 
 # 最新の状態にしてから作業

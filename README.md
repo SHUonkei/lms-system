@@ -26,9 +26,9 @@ A lecture management system is a software application that manages information a
 
 ## デモ環境について
 
-デモ用の Docker イメージ をビルドして、それを使って Docker コンテナーを起動することで、デモを利用できるようになります。
+デモ用の Docker イメージ をビルドして、それを使って Docker コンテナーを起動することで、デモを利用できるようになります.
 
-説明は `demo/README.md` にありますので、そちらを参照してください。
+説明は `demo/README.md` にありますので、そちらを参照してください.
 
 ## 開発環境について
 
@@ -38,14 +38,14 @@ A lecture management system is a software application that manages information a
 
 #### 必要なもの
 
-　devcon-gnpr-202312 を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です。
+　devcon-gnpr-202312 を動作をさせるには、Docker、Docker Compose、Visual Studio Code (VS Code) 、Docker 拡張機能、Dev Containers 拡張機能が必要です.
 
 #### Docker
 
 - [Docker Engine](https://docs.docker.com/engine/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-　これらは [Docker Desktop](https://docs.docker.com/desktop/) をインストールしてあれば使えます。Linux では Docker Desktop をインストールしなくても Docker Engine と Docker Compose だけをインストールして使えます。Ubuntuの場合,  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) を参照してインストールしてください。
+　これらは [Docker Desktop](https://docs.docker.com/desktop/) をインストールしてあれば使えます.Linux では Docker Desktop をインストールしなくても Docker Engine と Docker Compose だけをインストールして使えます.Ubuntuの場合,  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) を参照してインストールしてください.
 
 #### Visual Studio Code
 
@@ -53,7 +53,7 @@ A lecture management system is a software application that manages information a
 - [Docker 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 - [Dev Containers 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-　VS Code の拡張機能である Docker と Dev Containers を VS Code へインストールしておく必要があります。
+　VS Code の拡張機能である Docker と Dev Containers を VS Code へインストールしておく必要があります.
 
 ### 使い方
 
@@ -88,22 +88,38 @@ mvn spring-boot:run
 
 ### docker を使わない場合
 
-製作者二人（windows wsl2 ubuntu22,04, MAC OS)にて動作確認済みです.
+docker を使わない場合については, 製作者の環境（windows wsl2 ubuntu22,04)にて動作確認済みです.
+
+javaのversionはopenjdk-21-jdkです.
 
 ```console
-apt-get update
-apt-get upgrade -y
-apt-get install -y maven sqlite3
+sudo apt install openjdk-21-jdk
+```
+
+```console
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y maven sqlite3
 cd backend
 mvn clean
 mvn install
 ```
 
-以下でパッケージ化して、.jarファイルを作成できます,
+ここで, 複数のversionのjdkを入れている場合, 環境変数JAVA_HOMEを指定して, mvn コマンドを実行するのが確実です. 例えば, jdk17が入っているとmvnがそれを参照してしまうことがあります.
+
+次の例では, ubuntuで, jdk21を使っています.
 
 ```console
-mvn package
+JAVA_HOME=/usr/lib/jvm/java-1.21.0-openjdk-amd64 mvn install
 ```
+
+次に, `backend/src/main/resources/application.properties`のを以下のように書き換えます.
+
+```properties
+spring.datasource.url=jdbc:sqlite:./db/lmsdb.db
+```
+
+`./db/lmsdb.db`このパスは, 絶対パスにする方が確実ですが, 以下のコマンドが`backend`ディレクトリをカレントディレクトリとして実行されることを想定し, 相対パスで指定しています.
 
 単に起動する場合は, 次のコマンドを実行.
 
@@ -112,6 +128,22 @@ mvn spring-boot:run
 ```
 
 それから, webブラウザで以下のURLにアクセスすることで, アプリを使用できます.
+
+- <http://localhost:8080/>
+
+また, 以下でパッケージ化して、.jarファイルを作成できます,
+
+```console
+mvn package
+```
+
+これを起動するには以下のコマンドを実行.
+
+```console
+java -jar target/backend-0.0.1-SNAPSHOT.jar 
+```
+
+同様に, webブラウザで以下のURLにアクセスすることで, アプリを使用できます.
 
 - <http://localhost:8080/>
 
