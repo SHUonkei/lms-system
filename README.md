@@ -1,7 +1,5 @@
 # school assignments
 
-Java Spring Boot Lecture management system
-
 ```text
 lmssystem/
 ├── Dockerfile ... 開発用 Dockerfile
