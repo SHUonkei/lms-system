@@ -47,6 +47,7 @@ public class CourseController {
             model.addAttribute("errorMessage", "ID already exists.");
             List<TeacherModel> teachers = teacherService.selectAll();
             model.addAttribute("teachers", teachers);
+            model.addAttribute("course", new CourseModel());
             return "NewCourse.html";
         }
         courseService.insert(course);

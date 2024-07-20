@@ -40,6 +40,7 @@ public class StudentController {
             result.rejectValue("Id", "error.student", "This ID is already taken.");
         }
         if (result.hasErrors()) {
+            model.addAttribute("student", new StudentModel());
             return "NewStudent.html";
         }
 
