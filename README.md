@@ -12,11 +12,11 @@ lmssystem/
 
 ## Systemについて
 
-A lecture management system is a software application that manages information about lectures, students, and teachers. 
+講義管理システムで、生徒、教師、講義の登録、編集、削除ができる。生徒に対応する講義、教師に対応する講義、なども指定できる。また生徒ごとに、時間割を閲覧、編集できる。
 
-### Target Users
+### Target User
 
-- Administrative staff: Maintain student records and manage enrollment data
+- Administrative staff: システム管理者
 
 ### ER figure
 
