@@ -6,7 +6,7 @@ Docker Engine と Docker Compose Plugin の環境が必要です.
 - <https://docs.docker.com/engine/>
 - <https://docs.docker.com/compose/>
 
-カレントディレクトリーを、この README.md ファイルがあるディレクトリーにして作業します.
+カレントディレクトリーを、この README.md ファイルがあるディレクトリー, lms-system/demo/にして作業します.
 
 次の順に説明します.
 
