@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Teacher Time Table</title>
+    <head th:replace="header :: meta_header('Teacher Time Table', links, scripts)">
+        <th:block th:replace="header :: meta_header('Teacher Time Table', null, null)" />
+    </head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,6 +87,7 @@
 </head>
 
 <body>
+    <div th:replace="header :: header"></div>
     <h1>Teacher Timeschedule</h1>
     <div style="text-align: center;"><a th:href="@{/teacher/list}">Back to Teacher List Page</a></div>
     <div style="text-align: center;">

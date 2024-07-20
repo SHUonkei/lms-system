@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Edit Teacher Page</title>
+    <head th:replace="header :: meta_header('EditTeacher Page', links, scripts)">
+      <th:block th:replace="header :: meta_header('EditTeacher Page', null, null)"/>
   </head>
     <style>
       body {
