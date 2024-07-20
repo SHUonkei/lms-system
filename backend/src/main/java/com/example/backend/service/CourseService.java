@@ -47,4 +47,7 @@ public class CourseService {
     public List<CourseTeacherModel> searchByNameWithTeacherName(String name) {
         return dao.searchByNameWithTeacherName(name);
     }
+    public boolean existsById(String id) {
+        return dao.selectById(id) != null;
+    }
 }

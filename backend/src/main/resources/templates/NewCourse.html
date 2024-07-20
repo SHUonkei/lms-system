@@ -120,7 +120,10 @@
     <table>
       <tr>
         <th class="cell_title">ID</th>
-        <td><input type="text" th:field="*{Id}"></td>
+        <td>
+          <input type="text" th:field="*{Id}">
+          <div th:if="${#fields.hasErrors('Id')}" th:errors="*{Id}" style="color: red;"></div>
+        </td>
       </tr>
       <tr>
         <th class="cell_title">NAME</th>
