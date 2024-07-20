@@ -13,12 +13,12 @@ body {
   background-color: #333;
   color: white;
   position: relative;
-  z-index: 1000; /* Ensure it stays on top */
+  z-index: 1000; 
 }
 .header-area h3 {
   font-size: 24px;
   margin: 0;
-  z-index: 1001; /* Ensure text is on top */
+  z-index: 1001; 
 }
 .hamburger {
   width: 30px;
@@ -27,7 +27,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
-  z-index: 1001; /* Ensure the hamburger icon is on top */
+  z-index: 1001;
 }
 .hamburger span {
   width: 100%;
@@ -43,7 +43,7 @@ body {
   left: 0;
   transform: translateX(100%);
   transition: 0.5s;
-  z-index: 1000; /* Ensure it slides over content */
+  z-index: 1000;
 }
 .slide-menu li {
   color: white;
