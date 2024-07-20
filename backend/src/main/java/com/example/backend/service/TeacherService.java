@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.mapper.TeacherMapper;
-import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 
 @Service
@@ -17,8 +16,11 @@ public class TeacherService {
         this.dao = dao;
     }
 
-    public boolean insert(TeacherModel student) {
-        return dao.insert(student) > 0;
+    public boolean insert(TeacherModel teacher) {
+        if (teacher.getId().equals("") || teacher.getName().equals("") || teacher.getEmail().equals("")){
+            return false;
+        }
+        return dao.insert(teacher) > 0;
     }
 
     public List<TeacherModel> selectAll() {

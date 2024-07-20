@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.mapper.StudentCourseMapper;
-import com.example.backend.model.StudentCourseModel;
-import com.example.backend.model.CourseTeacherModel;
 import com.example.backend.model.StudentCourseJoinStudentModel;
+import com.example.backend.model.StudentCourseModel;
 @Service
 public class StudentCourseService {
 
@@ -18,6 +17,9 @@ public class StudentCourseService {
     }
 
     public boolean insert(StudentCourseModel studentCourse) {
+        if (studentCourse.getStudent_Id().equals("") || studentCourse.getCourse_Id().equals("")) {
+            return false;
+        }
         return dao.insert(studentCourse) > 0;
     }
 

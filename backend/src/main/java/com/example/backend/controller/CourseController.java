@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import org.springframework.validation.BindingResult;
 import com.example.backend.model.CourseModel;
+import com.example.backend.model.CourseTeacherModel;
+import com.example.backend.model.TeacherModel;
 import com.example.backend.service.CourseService;
 import com.example.backend.service.TeacherService;
-import com.example.backend.model.CourseTeacherModel;
-import com.example.backend.model.StudentModel;
-import com.example.backend.model.TeacherModel;
-import com.example.backend.model.TimetableModel;
 import com.example.backend.service.TimetableService;
 
 @Controller
@@ -50,7 +48,13 @@ public class CourseController {
             model.addAttribute("course", new CourseModel());
             return "NewCourse.html";
         }
-        courseService.insert(course);
+        if (courseService.insert(course) == false) {
+            model.addAttribute("errorMessage", "Fulfill all inputs.");
+            List<TeacherModel> teachers = teacherService.selectAll();
+            model.addAttribute("teachers", teachers);
+            model.addAttribute("course", new CourseModel());
+            return "NewCourse.html";
+        }
         return "redirect:/course/list";
     }
 
@@ -103,18 +107,31 @@ public class CourseController {
     @PostMapping("course/updateTimetable")
     public String updateTimetable(@RequestParam String courseId,
                                   @RequestParam String day,
-                                  @RequestParam String period) {
-        timetableService.updateTimetable(courseId, day, period);
+                                  @RequestParam String period,
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
+        if (timetableService.updateTimetable(courseId, day, period) == false) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Fulfill all inputs.");
+            return "redirect:/course/timetable?Id=" + courseId;
+        }
         return "redirect:/course/timetable?Id=" + courseId;
     }
 
     @PostMapping("course/deletePeriod")
     public String deletePeriod(@RequestParam String courseId,
-                               @RequestParam String combination) {
+                               @RequestParam String combination,
+                               RedirectAttributes redirectAttributes) {
         String[] parts = combination.split(" - Period ");
+        if (parts.length != 2) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Invalid input.");
+            return "redirect:/course/timetable?Id=" + courseId;
+        }
         String day = parts[0];
         String period = parts[1];
-        timetableService.deletePeriod(courseId, day, period);
+        if (timetableService.deletePeriod(courseId, day, period) == false) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Invalid input.");
+            return "redirect:/course/timetable?Id=" + courseId;
+        }
         return "redirect:/course/timetable?Id=" + courseId;
     }
 

@@ -54,15 +54,25 @@ public class TimetableService {
         return convertToMap(timetableList);
     }
 
-    public void deletePeriod(String courseId, String day, String period) {
+    public boolean  deletePeriod(String courseId, String day, String period) {
+        if (day.equals("") || period.equals("")) {
+            return false;
+        }
         timetableMapper.deleteTimetableEntry(courseId, day, period);
+        return true;
     }
     
-    public void updateTimetable(String courseId, String day, String period) {
+    public boolean updateTimetable(String courseId, String day, String period) {
+        if (day.equals("") || period.equals("")) {
+            return false;
+        }
+        else{
         if (timetableMapper.checkTimetableEntryExists(courseId, day, period)) {
             timetableMapper.deleteTimetableEntry(courseId, day, period);
         } else {
             timetableMapper.insertTimetableEntry(courseId, day, period);
+        }
+        return true;
         }
     }
 

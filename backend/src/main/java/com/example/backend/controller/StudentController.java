@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.validation.BindingResult;
 
 import com.example.backend.model.StudentModel;
 import com.example.backend.service.StudentService;
@@ -37,14 +36,21 @@ public class StudentController {
     @PostMapping("/new")
     public String create(@Validated @ModelAttribute("student") StudentModel student, BindingResult result, Model model) {
         if (studentService.selectById(student.getId()) != null) {
-            result.rejectValue("Id", "error.student", "This ID is already taken.");
+            model.addAttribute("errorMessage", "id is duplicated.");
+            model.addAttribute("student", new StudentModel());
+            return "NewStudent.html";
         }
+
         if (result.hasErrors()) {
             model.addAttribute("student", new StudentModel());
             return "NewStudent.html";
         }
 
-        studentService.insert(student);
+        if (studentService.insert(student) == false) {
+            model.addAttribute("errorMessage", "Fulfill all inputs.");
+            model.addAttribute("student", new StudentModel());
+            return "NewStudent.html";
+        }
         return "redirect:studentlist";
     }
 

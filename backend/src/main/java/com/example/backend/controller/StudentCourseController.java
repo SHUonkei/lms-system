@@ -10,17 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.backend.service.CourseService;
-import com.example.backend.service.TeacherService;
-import com.example.backend.model.StudentModel;
-import com.example.backend.model.CourseModel;
-import com.example.backend.model.CourseTeacherModel;
-import com.example.backend.model.TeacherModel;
-import com.example.backend.model.StudentCourseModel;
-import com.example.backend.service.StudentService;
-import com.example.backend.service.StudentCourseService;
 import com.example.backend.model.StudentCourseJoinStudentModel;
+import com.example.backend.model.StudentCourseModel;
+import com.example.backend.model.StudentModel;
+import com.example.backend.service.CourseService;
+import com.example.backend.service.StudentCourseService;
+import com.example.backend.service.StudentService;
 
 @Controller
 public class StudentCourseController {
@@ -47,11 +44,17 @@ public class StudentCourseController {
     }
 
     @PostMapping("studentcourse/new")
-    public String create(@Validated @ModelAttribute StudentCourseModel studentcourse, Model model) {
-        //debud
+    public String create(@Validated @ModelAttribute StudentCourseModel studentcourse, @RequestParam("Course_Id") String id, Model model, RedirectAttributes redirectAttributes) {
         System.out.println("studentcourse" + studentcourse);
-        studentCourseService.insert(studentcourse);
-        return "redirect:list?Id=" + studentcourse.getCourse_Id();
+        if(!studentCourseService.insert(studentcourse)) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Fulfill all inputs.");
+            redirectAttributes.addFlashAttribute("studentcourse", new StudentCourseModel());
+            redirectAttributes.addFlashAttribute("students", studentService.selectAll());
+            redirectAttributes.addFlashAttribute("courseId", id);
+            redirectAttributes.addFlashAttribute("courseName", courseService.selectById(id).getName());    
+            return "redirect:new?Id=" + id;
+        }
+        return "redirect:list?Id=" + id;
     }
 
     @GetMapping("studentcourse/list")

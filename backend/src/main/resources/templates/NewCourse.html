@@ -122,7 +122,7 @@
   <div th:replace="header :: header"></div>
   <h1>Add Course Page</h1>
   <div style="text-align: center;"><a th:href="@{/course/list}">Courses List Page is here</a></div>
-  <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+  <div class="error" th:if="${errorMessage}" th:text="${errorMessage}" style="text-align: center;"></div>
   <form action="#" th:action="@{/course/new}" th:object="${course}" method="post">
     <table>
       <tr>

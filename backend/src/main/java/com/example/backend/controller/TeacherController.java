@@ -5,15 +5,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.validation.BindingResult;
 
-import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 import com.example.backend.service.TeacherService;
 import com.example.backend.service.TimetableService;
@@ -36,17 +35,22 @@ public class TeacherController {
 
     @PostMapping("teacher/new")
     public String create(@Validated @ModelAttribute("teacher") TeacherModel teacher, BindingResult result, Model model) {
-        // IDが重複しているか確認
         if (teacherService.selectById(teacher.getId()) != null) {
-            result.rejectValue("Id", "error.teacher", "This ID is already taken.");
-        }
-
-        // エラーがある場合はフォームに戻る
-        if (result.hasErrors()) {
+            model.addAttribute("errorMessage", "this id is duplicated.");
+            model.addAttribute("teacher", new TeacherModel());
             return "NewTeacher.html";
         }
 
-        teacherService.insert(teacher);
+        if (result.hasErrors()) {
+            model.addAttribute("teacher", new TeacherModel());
+            return "NewTeacher.html";
+        }
+
+        if (teacherService.insert(teacher) == false) {
+            model.addAttribute("errorMessage", "Fulfill all inputs.");
+            model.addAttribute("teacher", new TeacherModel());
+            return "NewTeacher.html";
+        }
         return "redirect:list";
     }
 
@@ -66,12 +70,10 @@ public class TeacherController {
 
     @PostMapping("teacher/edit")
     public String update(@Validated @ModelAttribute("teacher") TeacherModel teacher, BindingResult result, Model model) {
-        // IDが重複しているか確認
         if (teacherService.selectById(teacher.getId()) != null && !teacherService.selectById(teacher.getId()).getId().equals(teacher.getId())) {
             result.rejectValue("Id", "error.teacher", "This ID is already taken.");
         }
 
-        // エラーがある場合はフォームに戻る
         if (result.hasErrors()) {
             return "EditTeacher.html";
         }
