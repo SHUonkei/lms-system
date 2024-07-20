@@ -12,7 +12,7 @@ lmssystem/
 
 ## Systemについて
 
-A lecture management system is a software application that manages information about lectures, students, and instructors. For each lecture, there is detailed information such as the lecture name, classroom, lecture day and time, instructor, and a list of enrolled students. For students, there is detailed information such as name, student ID, and enrolled lectures. For instructors, there is detailed information such as name, instructor ID, and assigned lectures.
+A lecture management system is a software application that manages information about lectures, students, and teachers. 
 
 ### Target Users
 
