@@ -171,9 +171,7 @@
               <td th:text="${teacher.id}"></td>
               <td th:text="${teacher.name}"></td>
               <td th:text="${teacher.email}"></td>
-              <!-- <td><a th:href="@{'/teacher/edit?id=' + ${teacher.id}}">Edit</a></td>
-              <td><a th:href="@{'/teacher/delete?Id=' + ${teacher.id}}">Delete</a></td>
-              <td><a th:href="@{'/teacher/timetable?Id=' + ${teacher.id}}">Timetable</a></td> -->
+
               <td>
                 <form th:action="@{/teacher/edit}" method="get">
                   <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
