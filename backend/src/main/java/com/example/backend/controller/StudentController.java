@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,8 +34,23 @@ public class StudentController {
     }
 
     @PostMapping("/new")
-    public String create(@Validated @ModelAttribute StudentModel student, Model model) {
-        studentService.insert(student);
+    public String create(@Validated @ModelAttribute("student") StudentModel student, BindingResult result, Model model) {
+        if (studentService.selectById(student.getId()) != null) {
+            model.addAttribute("errorMessage", "id is duplicated.");
+            model.addAttribute("student", new StudentModel());
+            return "NewStudent.html";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("student", new StudentModel());
+            return "NewStudent.html";
+        }
+
+        if (studentService.insert(student) == false) {
+            model.addAttribute("errorMessage", "Fulfill all inputs.");
+            model.addAttribute("student", new StudentModel());
+            return "NewStudent.html";
+        }
         return "redirect:studentlist";
     }
 
@@ -42,6 +58,7 @@ public class StudentController {
     public String displayStudents(Model model) {
         List<StudentModel> students = studentService.selectAll();
         model.addAttribute("students", students);
+        model.addAttribute("student", new StudentModel()); 
         return "StudentList.html";
     }
 

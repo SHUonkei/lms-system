@@ -17,6 +17,9 @@ public class StudentService {
     }
 
     public boolean insert(StudentModel student) {
+        if (student.getId().equals("") || student.getName().equals("") || student.getEmail().equals("")) {
+            return false;
+        }
         return dao.insert(student) > 0;
     }
 
@@ -39,4 +42,5 @@ public class StudentService {
     public List<StudentModel> searchByName(String name) {
         return dao.searchByName(name);
     }
+
 }

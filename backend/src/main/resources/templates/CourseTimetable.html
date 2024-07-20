@@ -81,6 +81,11 @@
         button:hover {
             background-color: #555;
         }
+
+        .error {
+            color: #f00;
+            font-weight: bold;
+        }
     </style>
 <body>
     <div th:replace="header :: header"></div>
@@ -113,7 +118,8 @@
                 </tr>
             </tbody>
         </table>
-        <h2>Add Period</h2>
+          <div class="error" th:if="${errorMessage}" th:text="${errorMessage}" style="text-align: center;"></div>
+      <h2>Add Period</h2>
         <form th:action="@{/course/updateTimetable}" method="post">
             <input type="hidden" name="courseId" th:value="${courseId}" />
             <select name="day">

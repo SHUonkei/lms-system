@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.example.backend.mapper.CourseMapper;
 import com.example.backend.model.CourseModel;
 import com.example.backend.model.CourseTeacherModel;
-import com.example.backend.model.StudentModel;
 
 @Service
 public class CourseService {
@@ -19,6 +18,10 @@ public class CourseService {
     }
 
     public boolean insert(CourseModel course) {
+        //if id null
+        if (course.getId().equals("") || course.getName().equals("") || course.getTeacher_Id().equals("") || course.getRoom().equals("")){
+            return false;
+        }
         return dao.insert(course) > 0;
     }
 
@@ -46,5 +49,8 @@ public class CourseService {
     }
     public List<CourseTeacherModel> searchByNameWithTeacherName(String name) {
         return dao.searchByNameWithTeacherName(name);
+    }
+    public boolean existsById(String id) {
+        return dao.selectById(id) != null;
     }
 }
