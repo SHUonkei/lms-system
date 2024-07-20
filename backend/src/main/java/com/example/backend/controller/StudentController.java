@@ -36,12 +36,9 @@ public class StudentController {
 
     @PostMapping("/new")
     public String create(@Validated @ModelAttribute("student") StudentModel student, BindingResult result, Model model) {
-        // IDが重複しているか確認
         if (studentService.selectById(student.getId()) != null) {
             result.rejectValue("Id", "error.student", "This ID is already taken.");
         }
-
-        // エラーがある場合はフォームに戻る
         if (result.hasErrors()) {
             return "NewStudent.html";
         }
@@ -54,6 +51,7 @@ public class StudentController {
     public String displayStudents(Model model) {
         List<StudentModel> students = studentService.selectAll();
         model.addAttribute("students", students);
+        model.addAttribute("student", new StudentModel()); 
         return "StudentList.html";
     }
 

@@ -1,103 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>Add Teacher Page</title>
-    <head th:replace="header :: meta_header('CourseList Page', links, scripts)">
-      <th:block th:replace="header :: meta_header('CourseList Page', null, null)"/>
+    <head th:replace="header :: meta_header('Add Teacher Page', links, scripts)">
+        <th:block th:replace="header :: meta_header('Add Teacher Page', null, null)"/>
     </head>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        color: #333;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
 
-      h1 {
-        text-align: center;
-        color: #444;
-      }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
 
-      a {
-        color: #333;
-        text-decoration: none;
-        font-weight: bold;
-      }
+        a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-      a:hover {
-        text-decoration: underline;
-      }
+        a:hover {
+            text-decoration: underline;
+        }
 
-      form {
-        width: 50%;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-      th.cell_title {
-        text-align: left;
-        padding: 10px;
-        background-color: #ddd;
-        color: #333;
-      }
+        th.cell_title {
+            text-align: left;
+            padding: 10px;
+            background-color: #ddd;
+            color: #333;
+        }
 
-      td {
-        padding: 10px;
-      }
+        td {
+            padding: 10px;
+        }
 
-      input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-      button, input[type="button"] {
-        display: block;
-        width: 100px;
-        margin: 20px auto;
-        padding: 10px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        border-radius: 4px;
-      }
+        button, input[type="button"] {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 4px;
+        }
 
-      button:hover, input[type="button"]:hover {
-        background-color: #555;
-      }
+        button:hover, input[type="button"]:hover {
+            background-color: #555;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div th:replace="header :: header"></div>
     <h1>Add Teacher Page</h1>
     <div style="text-align: center;"><a th:href="@{/teacher/list}">Teachers List Page is here</a></div>
     <form action="#" th:action="@{/teacher/new}" th:object="${teacher}" method="post">
-      <table>
-        <tr>
-          <th class="cell_title">ID</th>
-          <td><input type="text" th:field="*{Id}"></td>
-        </tr>
-        <tr>
-          <th class="cell_title">NAME</th>
-          <td><input type="text" th:field="*{Name}"></td>
-        </tr>
-        <tr>
-          <th class="cell_title">EMAIL</th>
-          <td><input type="text" th:field="*{Email}"></td>
-        </tr>
-      </table>
-      <button type="submit">Add Data</button>
+        <table>
+            <tr>
+                <th class="cell_title">ID</th>
+                <td>
+                    <input type="text" th:field="*{Id}" />
+                    <div th:if="${#fields.hasErrors('Id')}" class="error" th:errors="*{Id}">ID Error</div>
+                </td>
+            </tr>
+            <tr>
+                <th class="cell_title">NAME</th>
+                <td><input type="text" th:field="*{Name}" /></td>
+            </tr>
+            <tr>
+                <th class="cell_title">EMAIL</th>
+                <td><input type="text" th:field="*{Email}" /></td>
+            </tr>
+        </table>
+        <button type="submit">Add Data</button>
     </form>
-  </body>
+</body>
 </html>
