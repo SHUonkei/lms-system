@@ -16,7 +16,7 @@ import com.example.backend.model.CourseModel;
 import com.example.backend.service.CourseService;
 import com.example.backend.service.TeacherService;
 import com.example.backend.model.CourseTeacherModel;
-
+import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 import com.example.backend.model.TimetableModel;
 import com.example.backend.service.TimetableService;
@@ -110,5 +110,12 @@ public class CourseController {
         String period = parts[1];
         timetableService.deletePeriod(courseId, day, period);
         return "redirect:/course/timetable?Id=" + courseId;
+    }
+
+    @GetMapping("/course/search")
+    public String searchCourses(@RequestParam("name") String name, Model model) {
+        List<CourseModel> courses = courseService.searchByName(name);
+        model.addAttribute("courses", courses);
+        return "CourseList.html";
     }
 }

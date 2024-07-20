@@ -104,11 +104,56 @@
   input[type="button"]:hover {
     background-color: #555;
   }
+
+  .search-container {
+    text-align: center;
+    margin: 20px;
+  }
+
+  .search-container input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .search-container input[type="text"]:focus {
+    border-color: #777;
+    box-shadow: 0 0 8px rgba(119, 119, 119, 0.5);
+  }
+
+  .search-container input[type="submit"] {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 25px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .search-container input[type="submit"]:hover {
+    background-color: #555;
+    box-shadow: 0 0 8px rgba(85, 85, 85, 0.5);
+  }
 </style>
 
 <body>
   <div th:replace="header :: header"></div>
   <h1>Teachers List Page</h1>
+
+  <div class="search-container">
+    <form th:action="@{/teacher/search}" method="get">
+      <input type="text" name="name" placeholder="Search by name" />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
+
   <div style="text-align: center;"><a th:href="@{/teacher/new}">Add Teacher Page is Here</a></div>
   <table>
       <thead>

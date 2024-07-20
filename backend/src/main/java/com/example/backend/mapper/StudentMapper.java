@@ -25,4 +25,7 @@ public interface StudentMapper {
 
     @Delete("DELETE FROM students WHERE ID = #{Id}")
     int delete(String Id);
+
+    @Select("SELECT * FROM students WHERE NAME LIKE '%' || #{name} || '%'")
+    List<StudentModel> searchByName(String name);
 }

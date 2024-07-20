@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import com.example.backend.model.CourseModel;
 import com.example.backend.model.CourseTeacherModel;
+import com.example.backend.model.StudentModel;
 @Mapper
 public interface CourseMapper {
     @Insert("INSERT INTO courses(ID, NAME, TEACHER_ID, ROOM)"
@@ -29,4 +30,7 @@ public interface CourseMapper {
 
     @Delete("DELETE FROM courses WHERE ID = #{Id}")
     int delete(String Id);
+
+    @Select("SELECT * FROM courses WHERE NAME LIKE '%' || #{name} || '%'")
+    List<CourseModel> searchByName(String name);
 }

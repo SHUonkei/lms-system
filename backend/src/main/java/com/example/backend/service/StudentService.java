@@ -35,4 +35,8 @@ public class StudentService {
     public boolean delete(String id) {
         return dao.delete(id) > 0;
     }
+
+    public List<StudentModel> searchByName(String name) {
+        return dao.searchByName(name);
+    }
 }

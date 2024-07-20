@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 import com.example.backend.service.TeacherService;
 import com.example.backend.service.TimetableService;
@@ -68,5 +69,11 @@ public class TeacherController {
         Map<String, Map<String, String>> timetable = timetableService.getTimetableForTeacher(teacherId);
         model.addAttribute("timetable", timetable);
         return "TeacherTimetable.html";
+    }
+    @GetMapping("/teacher/search")
+    public String searchTeachers(@RequestParam("name") String name, Model model) {
+        List<TeacherModel> teachers = TeacherService.searchByName(name);
+        model.addAttribute("teachers", teachers);
+        return "TeacherList.html";
     }
 }
