@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.validation.BindingResult;
 
+import org.springframework.validation.BindingResult;
 import com.example.backend.model.CourseModel;
 import com.example.backend.service.CourseService;
 import com.example.backend.service.TeacherService;
@@ -36,17 +36,21 @@ public class CourseController {
     @RequestMapping("course/new")
     public String addCourse(Model model) {
         List<TeacherModel> teachers = teacherService.selectAll();
-
         model.addAttribute("course", new CourseModel());
         model.addAttribute("teachers", teachers);
-
         return "NewCourse.html";
     }
 
     @PostMapping("course/new")
     public String create(@Validated @ModelAttribute CourseModel course, Model model) {
+        if (courseService.selectById(course.getId()) != null) {
+            model.addAttribute("errorMessage", "ID already exists.");
+            List<TeacherModel> teachers = teacherService.selectAll();
+            model.addAttribute("teachers", teachers);
+            return "NewCourse.html";
+        }
         courseService.insert(course);
-        return "redirect:list";
+        return "redirect:/course/list";
     }
 
     @GetMapping("course/list")

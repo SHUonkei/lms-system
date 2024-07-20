@@ -110,20 +110,24 @@
     select option {
       padding: 8px;
     }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <div th:replace="header :: header"></div>
   <h1>Add Course Page</h1>
   <div style="text-align: center;"><a th:href="@{/course/list}">Courses List Page is here</a></div>
+  <div class="error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
   <form action="#" th:action="@{/course/new}" th:object="${course}" method="post">
     <table>
       <tr>
         <th class="cell_title">ID</th>
-        <td>
-          <input type="text" th:field="*{Id}">
-          <div th:if="${#fields.hasErrors('Id')}" th:errors="*{Id}" style="color: red;"></div>
-        </td>
+        <td><input type="text" th:field="*{Id}"></td>
       </tr>
       <tr>
         <th class="cell_title">NAME</th>
