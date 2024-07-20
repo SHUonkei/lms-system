@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
 
 import com.example.backend.model.StudentModel;
 import com.example.backend.service.StudentService;
@@ -33,7 +35,17 @@ public class StudentController {
     }
 
     @PostMapping("/new")
-    public String create(@Validated @ModelAttribute StudentModel student, Model model) {
+    public String create(@Validated @ModelAttribute("student") StudentModel student, BindingResult result, Model model) {
+        // IDが重複しているか確認
+        if (studentService.selectById(student.getId()) != null) {
+            result.rejectValue("Id", "error.student", "This ID is already taken.");
+        }
+
+        // エラーがある場合はフォームに戻る
+        if (result.hasErrors()) {
+            return "NewStudent.html";
+        }
+
         studentService.insert(student);
         return "redirect:studentlist";
     }

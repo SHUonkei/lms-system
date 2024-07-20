@@ -141,57 +141,30 @@
     box-shadow: 0 0 8px rgba(85, 85, 85, 0.5);
   }
 </style>
-
+</head>
 <body>
   <div th:replace="header :: header"></div>
-  <h1>Students List Page</h1>
-
-  <div class="search-container">
-    <form th:action="@{/search}" method="get">
-      <input type="text" name="name" placeholder="Search by name" />
-      <input type="submit" value="Search" />
-    </form>
-  </div>
-
-  <div style="text-align: center;">
-    <a th:href="@{/new}">Add Student Page is Here</a>
-  </div>
-
-  <table>
-    <thead>
+  <h1>Add Student Page</h1>
+  <div style="text-align: center;"><a th:href="@{/studentlist}">Students List Page is here</a></div>
+  <form action="#" th:action="@{/new}" th:object="${student}" method="post">
+    <table>
       <tr>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>EMAIL</th>
-        <th colspan="3">ACTIONS</th> 
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="student : ${students}">
-        <td th:text="${student.Id}"></td>
-        <td th:text="${student.Name}"></td>
-        <td th:text="${student.Email}"></td>
+        <th class="cell_title">ID</th>
         <td>
-          <form th:action="@{/edit}" method="get">
-            <input type="submit" class="btn btn-outline-primary" name="edit" value="edit">
-            <input type="hidden" name="Id" th:value="${student.Id}">
-          </form>
-        </td>
-        <td>
-          <form th:action="@{/delete}" method="get">
-            <input type="submit" class="btn btn-outline-danger" name="delete" value="delete">
-            <input type="hidden" name="Id" th:value="${student.Id}">
-          </form>
-        </td>
-        <td>
-          <form th:action="@{/timetable}" method="get">
-            <input type="submit" class="btn btn-outline-info" name="timetable" value="timetable">
-            <input type="hidden" name="Id" th:value="${student.Id}">
-          </form>
+          <input type="text" th:field="*{Id}" />
+          <div th:if="${#fields.hasErrors('Id')}" class="error" th:errors="*{Id}">ID Error</div>
         </td>
       </tr>
-    </tbody>
-  </table>
+      <tr>
+        <th class="cell_title">NAME</th>
+        <td><input type="text" th:field="*{Name}" /></td>
+      </tr>
+      <tr>
+        <th class="cell_title">EMAIL</th>
+        <td><input type="text" th:field="*{Email}" /></td>
+      </tr>
+    </table>
+    <button type="submit">Add Data</button>
+  </form>
 </body>
-
 </html>

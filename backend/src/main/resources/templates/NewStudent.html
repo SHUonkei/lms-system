@@ -76,6 +76,10 @@
       button:hover, input[type="button"]:hover {
         background-color: #555;
       }
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
     </style>
   </head>
   <body>
@@ -86,15 +90,18 @@
       <table>
         <tr>
           <th class="cell_title">ID</th>
-          <td><input type="text" th:field="*{Id}"></td>
+          <td>
+            <input type="text" th:field="*{Id}" />
+            <div th:if="${#fields.hasErrors('Id')}" class="error" th:errors="*{Id}">ID Error</div>
+          </td>
         </tr>
         <tr>
           <th class="cell_title">NAME</th>
-          <td><input type="text" th:field="*{Name}"></td>
+          <td><input type="text" th:field="*{Name}" /></td>
         </tr>
         <tr>
           <th class="cell_title">EMAIL</th>
-          <td><input type="text" th:field="*{Email}"></td>
+          <td><input type="text" th:field="*{Email}" /></td>
         </tr>
       </table>
       <button type="submit">Add Data</button>
