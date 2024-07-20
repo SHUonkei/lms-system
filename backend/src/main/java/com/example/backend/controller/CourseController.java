@@ -116,6 +116,8 @@ public class CourseController {
     public String searchCourses(@RequestParam("name") String name, Model model) {
         List<CourseModel> courses = courseService.searchByName(name);
         model.addAttribute("courses", courses);
+        List<CourseTeacherModel> courseTeachers = courseService.searchByNameWithTeacherName(name);
+        model.addAttribute("courseTeachers", courseTeachers);
         return "CourseList.html";
     }
 }

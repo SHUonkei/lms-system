@@ -44,4 +44,7 @@ public class CourseService {
     public List<CourseModel> searchByName(String name) {
         return dao.searchByName(name);
     }
+    public List<CourseTeacherModel> searchByNameWithTeacherName(String name) {
+        return dao.searchByNameWithTeacherName(name);
+    }
 }

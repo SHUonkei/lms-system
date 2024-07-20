@@ -33,4 +33,8 @@ public interface CourseMapper {
 
     @Select("SELECT * FROM courses WHERE NAME LIKE '%' || #{name} || '%'")
     List<CourseModel> searchByName(String name);
+
+    @Select("SELECT c.ID, c.NAME , c.ROOM, t.NAME as TEACHER_NAME FROM courses c join teachers t on t.ID=c.TEACHER_ID WHERE c.NAME LIKE '%' || #{name} || '%'")
+    List<CourseTeacherModel> searchByNameWithTeacherName(String name);
+
 }
