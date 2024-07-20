@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.mapper.TeacherMapper;
+import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 
 @Service
@@ -34,5 +35,8 @@ public class TeacherService {
 
     public boolean delete(String id) {
         return dao.delete(id) > 0;
+    }
+    public List<TeacherModel> searchByName(String name) {
+        return dao.searchByName(name);
     }
 }

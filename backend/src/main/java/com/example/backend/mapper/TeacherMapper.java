@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.example.backend.model.StudentModel;
 import com.example.backend.model.TeacherModel;
 @Mapper
 public interface TeacherMapper {
@@ -25,4 +27,7 @@ public interface TeacherMapper {
 
     @Delete("DELETE FROM teachers WHERE ID = #{Id}")
     int delete(String Id);
+
+    @Select("SELECT * FROM teachers WHERE NAME LIKE '%' || #{name} || '%'")
+    List<TeacherModel> searchByName(String name);
 }

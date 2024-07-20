@@ -70,4 +70,11 @@ public class StudentController {
         model.addAttribute("timetable", timetable);
         return "Timetable.html";
     }
+
+    @GetMapping("/search")
+    public String searchStudents(@RequestParam("name") String name, Model model) {
+        List<StudentModel> students = studentService.searchByName(name);
+        model.addAttribute("students", students);
+        return "StudentList.html";
+    }
 }
