@@ -1,4 +1,5 @@
-# school assignments
+#　このレポジトリについて
+授業の課題で制作。
 
 ```text
 lmssystem/
